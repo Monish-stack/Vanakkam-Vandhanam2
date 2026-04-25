@@ -1,834 +1,1445 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>வணக்கம் வந்தனம் | Premium Event Artistry</title>
-    <meta name="description"
-        content="Luxury wedding stages, bespoke birthday wonderlands, and majestic traditional events.">
-
+    <meta name="description" content="Vanakam Vandhanam - Premium South Indian luxury event decoration company. Crafting majestic traditional mandaps and breathtaking modern celebrations.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C9A85C;
+            --gold-bright: #E5C37A;
+            --gold-dark: #A68644;
+            --bg: #0A0600;
+            --bg-accent: #1A1308;
+            --text: #FFFFFF;
+            --text-dim: #E5E1D8;
+            --text-muted: #A09B8E;
+            --glass: rgba(10, 6, 0, 0.75);
+            --transition: 0.4s cubic-bezier(.25,.46,.45,.94);
+            --transition-spring: 0.6s cubic-bezier(.34,1.56,.64,1);
+        }
 
-    <link rel="stylesheet" href="./style.css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none !important; /* Directive 7 */
+        }
+
+        @media (pointer: coarse) {
+            * { cursor: auto !important; }
+            #cursor, #cursor-aura { display: none !important; }
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Directive 1 — PAGE LOADER */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+
+        #loader.fade-out {
+            transform: translateY(-100%);
+        }
+
+        .loader-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 2rem;
+        }
+
+        .loader-logo path {
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 1.5;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawLogo 1.5s ease forwards;
+        }
+
+        @keyframes drawLogo {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .loader-text {
+            display: flex;
+            gap: 0.2rem;
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .loader-text span {
+            opacity: 0;
+            animation: fadeInLetter 0.4s ease forwards;
+        }
+
+        @keyframes fadeInLetter {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Directive 7 — CURSOR */
+        #cursor {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: normal;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        #cursor-aura {
+            position: fixed;
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: 700;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease, border-color 0.3s ease, width 0.3s ease, height 0.3s ease;
+        }
+
+        #cursor.hovered {
+            transform: scale(3.5);
+            background: #fff;
+            mix-blend-mode: difference;
+        }
+
+        #cursor-aura.hovered {
+            transform: scale(2);
+            background: rgba(201, 168, 92, 0.1);
+            color: var(--gold);
+        }
+
+        /* Directive 3 — NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            padding: 0.75rem 0;
+            background: var(--glass);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(201, 168, 92, 0.3);
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-cta {
+            background: var(--gold);
+            color: #000;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(201, 168, 92, 0.3);
+        }
+
+        /* Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--gold);
+            z-index: 1001;
+            transition: width 0.1s linear;
+        }
+
+        /* Directive 2 — HERO SECTION */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            filter: brightness(0.4);
+            will-change: transform;
+            transform-origin: center center;
+            animation: kenBurns 14s ease-in-out infinite alternate;
+        }
+
+        @keyframes kenBurns {
+            from { transform: scale(1.08) translate(10px, 5px); }
+            to { transform: scale(1.0) translate(0, 0); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 0 1rem;
+        }
+
+        .hero-headline {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem 1.5rem;
+        }
+
+        .hero-headline span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px);
+            filter: blur(6px);
+        }
+
+        .hero-headline span.reveal {
+            animation: wordReveal 0.8s cubic-bezier(.25,.46,.45,.94) forwards;
+        }
+
+        @keyframes wordReveal {
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        .hero-subtext {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-subtext.reveal {
+            animation: fadeInUp 0.8s ease forwards 0.8s;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--gold);
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+        }
+
+        .hero-cta.reveal {
+            animation: fadeInUp 0.8s ease forwards 1s, goldGlow 2.5s infinite;
+        }
+
+        @keyframes goldGlow {
+            0% { box-shadow: 0 0 0 0 rgba(201,168,92,0.5); }
+            70% { box-shadow: 0 0 0 16px rgba(201,168,92,0); }
+            100% { box-shadow: 0 0 0 0 rgba(201,168,92,0); }
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Particles */
+        #hero-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Directive 4 — MARQUEE TICKER */
+        .marquee-section {
+            padding: 4rem 0;
+            background: var(--bg-accent);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+        }
+
+        .marquee-row {
+            display: flex;
+            white-space: nowrap;
+            will-change: transform;
+        }
+
+        .marquee-row span {
+            font-size: 4rem;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(201, 168, 92, 0.4);
+            margin-right: 4rem;
+            text-transform: uppercase;
+        }
+
+        .marquee-row span.filled {
+            color: var(--gold);
+            -webkit-text-stroke: 0;
+        }
+
+        .row-1 { animation: scrollLeft 32s linear infinite; }
+        .row-2 { animation: scrollRight 28s linear infinite; }
+
+        .marquee-row:hover { animation-play-state: paused; }
+
+        @keyframes scrollLeft {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        @keyframes scrollRight {
+            from { transform: translateX(-50%); }
+            to { transform: translateX(0); }
+        }
+
+        /* Section Reveal Classes */
+        .reveal-up { opacity: 0; transform: translateY(40px); transition: 0.8s ease; }
+        .reveal-up.active { opacity: 1; transform: translateY(0); }
+
+        /* General Styles */
+        section { padding: 100px 0; position: relative; }
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .section-title h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        .section-title p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Shimmer Effect */
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.22) 50%, transparent 70%);
+            transform: skewX(-20deg);
+            transition: 0.55s ease;
+        }
+        .shimmer-btn:hover::after {
+            left: 150%;
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            border-radius: 50%;
+            animation: rippleEffect 0.5s linear forwards;
+        }
+        @keyframes rippleEffect {
+            from { width: 0; height: 0; opacity: 0.4; }
+            to { width: 400px; height: 400px; opacity: 0; }
+        }
+
+        /* Ornaments */
+        .ornament {
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: -1;
+            animation: slowRotate 60s linear infinite, pulseOpacity 4s ease-in-out infinite alternate;
+        }
+        @keyframes slowRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes pulseOpacity { from { opacity: 0.05; } to { opacity: 0.15; } }
+
+        /* WhatsApp Button */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            z-index: 999;
+            animation: waPulse 3s infinite;
+        }
+        @keyframes waPulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* ABOUT SECTION */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        @media (max-width: 992px) { .about-grid { grid-template-columns: 1fr; } }
+        .about-image-wrapper { position: relative; }
+        .parallax-img {
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: transform 0.8s ease;
+            width: 100%;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .stat-number { font-size: 2.5rem; color: var(--gold); font-weight: 700; }
+        .stat-item p { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+
+        /* SERVICES SECTION */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .service-card {
+            background: var(--bg-accent);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(201, 168, 92, 0.1);
+            transition: var(--transition-spring);
+        }
+        .service-card:hover { transform: translateY(-10px); border-color: var(--gold); }
+        .service-icon { font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--gold); }
+
+        /* GALLERY SECTION */
+        .gallery-filters { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
+        .filter-btn {
+            background: transparent;
+            border: 1px solid rgba(201, 168, 92, 0.3);
+            color: var(--text-dim);
+            padding: 0.7rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .filter-btn.active, .filter-btn:hover { background: var(--gold); color: #000; border-color: var(--gold); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            perspective: 1000px;
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-info h4 { font-size: 1.5rem; color: var(--gold); margin-bottom: 0.5rem; }
+
+        /* PROCESS SECTION */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        .process-step { position: relative; }
+        .step-number { font-size: 4rem; font-weight: 800; color: rgba(201, 168, 92, 0.1); line-height: 1; margin-bottom: -1rem; }
+        .step-content h3 { color: var(--gold); margin-bottom: 1rem; }
+        .step-line { position: absolute; top: 20px; right: -50%; width: 100%; z-index: -1; }
+        @media (max-width: 768px) { .step-line { display: none; } }
+
+        /* PRICING SECTION */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            align-items: flex-start;
+        }
+        .pricing-card {
+            background: var(--bg-accent);
+            padding: 3.5rem 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(201, 168, 92, 0.1);
+            text-align: center;
+            transition: var(--transition-spring);
+            position: relative;
+        }
+        .pricing-card:hover { border-color: var(--gold); }
+        .grand-card {
+            transform: translateY(-12px);
+            border: 1px solid var(--gold);
+            background: linear-gradient(145deg, #1A1308, #0A0600);
+            animation: breathingShadow 3s ease-in-out infinite alternate;
+        }
+        @keyframes breathingShadow {
+            from { box-shadow: 0 20px 60px rgba(201,168,92,0.15); }
+            to { box-shadow: 0 28px 80px rgba(201,168,92,0.35); }
+        }
+        .popular-tag {
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--gold);
+            color: #000;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .price { font-size: 1.5rem; font-weight: 700; margin: 1.5rem 0; color: var(--gold); }
+        .pricing-card ul { margin-bottom: 2.5rem; text-align: left; }
+        .pricing-card li { margin-bottom: 1rem; color: var(--text-dim); padding-left: 1.5rem; position: relative; }
+        .pricing-card li::before { content: '⚜'; position: absolute; left: 0; color: var(--gold); font-size: 0.8rem; }
+
+        /* TESTIMONIALS */
+        .testimonial-carousel {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+            scrollbar-width: none;
+            cursor: grab;
+        }
+        .testimonial-carousel::-webkit-scrollbar { display: none; }
+        .testimonial-card {
+            flex: 0 0 450px;
+            background: var(--bg-accent);
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid rgba(201, 168, 92, 0.1);
+        }
+        .testimonial-card p { font-style: italic; font-size: 1.1rem; margin-bottom: 2rem; color: var(--text-dim); }
+        .author { font-weight: 700; color: var(--gold); }
+
+        /* FAQ */
+        .faq-accordion { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid rgba(201, 168, 92, 0.2); margin-bottom: 1rem; }
+        .faq-header {
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .faq-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .faq-body p { padding-bottom: 1.5rem; color: var(--text-muted); }
+        .faq-icon { transition: transform 0.4s ease; color: var(--gold); font-size: 1.5rem; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        .faq-item.active .faq-body { max-height: 200px; }
+
+        /* FOOTER */
+        .footer { background: #000; padding: 100px 0 50px; border-top: 1px solid rgba(201, 168, 92, 0.1); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 5rem; }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+        .footer-brand h2 { font-size: 2.5rem; color: var(--gold); margin-bottom: 1.5rem; }
+        .footer-links h3, .footer-contact h3 { color: var(--gold); margin-bottom: 1.5rem; font-size: 1.2rem; }
+        .footer-links a, .footer-contact p { display: block; margin-bottom: 1rem; color: var(--text-muted); }
+        .social-links { display: flex; gap: 1.5rem; margin-top: 2rem; }
+        .social-links a { color: var(--gold); font-weight: 700; }
+        .footer-bottom { text-align: center; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.9rem; }
+    </style>
 </head>
-
 <body>
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- Premium Loader -->
-    <div class="loader">
-        <div class="loader-text font-serif">
-            <span>வணக்கம்</span> <span class="text-gold">வந்தனம்</span>
+    <!-- Directive 1 — PAGE LOADER -->
+    <div id="loader">
+        <svg class="loader-logo" viewBox="0 0 100 100">
+            <path d="M50 10 C35 10 35 40 50 45 C65 40 65 10 50 10 M50 45 C35 50 20 60 20 75 C20 85 45 85 50 75 C55 85 80 85 80 75 C80 60 65 50 50 45 M50 45 L50 90" stroke-linecap="round" />
+        </svg>
+        <div class="loader-text" id="loader-text">
+            <!-- வணக்கம் வந்தனம் letters will be injected here -->
         </div>
-        <div class="loader-progress"></div>
     </div>
 
-    <!-- Canvas for Particle Animation -->
-    <canvas id="particles-canvas"></canvas>
+    <!-- Directive 7 — CURSOR -->
+    <div id="cursor"></div>
+    <div id="cursor-aura"></div>
 
-    <!-- Background Animated Blobs -->
-    <div class="bg-blobs">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
+    <!-- Scroll Progress -->
+    <div id="scroll-progress"></div>
 
-    <!-- Advanced Cursor Hover Reveal Image -->
-    <img src="" alt="" class="hover-preview-img" id="hoverPreviewImg">
-
+    <!-- Directive 3 — NAVBAR -->
     <nav class="navbar">
-        <div class="logo">
-            <span class="logo-text magnetic" data-strength="30">வணக்கம் <span class="accent">வந்தனம்</span></span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#about" class="magnetic" data-strength="20">About</a></li>
-            <li><a href="#gallery" class="magnetic" data-strength="20">Gallery</a></li>
-            <li><a href="#services" class="magnetic" data-strength="20">Expertise</a></li>
-            <li><a href="#why-us" class="magnetic" data-strength="20">Why Us</a></li>
-        </ul>
-        <a href="https://wa.me/919788742627" target="_blank" class="btn-primary magnetic" data-strength="40">Consult
-            Expert</a>
-
-        <div class="hamburger" id="hamburgerBtn">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+        <div class="container">
+            <a href="#" class="nav-logo">
+                <span style="color: #fff">⚜</span>
+                VANAKAM VANDHANAM
+            </a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#services">Expertise</a>
+                <a href="#why-us">Why Us</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <a href="https://wa.me/919788742627" class="nav-cta shimmer-btn">Consult Expert</a>
         </div>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu-inner">
-            <div class="mobile-menu-header">
-                <span class="logo-text font-serif">வணக்கம் <span class="accent">வந்தனம்</span></span>
-                <button class="mobile-close" id="mobileClose">&times;</button>
-            </div>
-            <ul class="mobile-nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#services">Expertise</a></li>
-                <li><a href="#why-us">Why Us</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <a href="https://wa.me/919788742627" target="_blank" class="btn-primary"
-                style="width:100%;text-align:center;margin-top:2rem;">Consult Expert</a>
-        </div>
-    </div>
-
-    <header class="hero">
-        <div class="hero-bg-wrapper">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80"
-                alt="Royal Wedding" class="bg-img" />
-            <div class="hero-overlay"></div>
-        </div>
-
+    <!-- Directive 2 — HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div id="hero-particles"></div>
         <div class="hero-content">
-            <div class="badge reveal-text">South Indian Grandeur</div>
-            <h1 class="hero-title">
-                <div class="line-mask">
-                    <div class="line-content">CELEBRATE <span class="italic-serif text-gold">with</span></div>
-                </div>
-                <div class="line-mask">
-                    <div class="line-content">TIMELESS</div>
-                </div>
-                <div class="line-mask">
-                    <div class="line-content">ELEGANCE</div>
-                </div>
+            <h1 class="hero-headline" id="hero-headline">
+                <!-- Words injected by JS -->
             </h1>
-            <p class="hero-subtitle reveal-text delay-1">From majestic traditional mandaps to breathtaking modern
-                celebrations. We craft the perfect aesthetic for your most cherished moments.</p>
-            <div class="hero-actions reveal-text delay-2">
-                <a href="#gallery" class="btn-primary glow-effect magnetic" data-strength="40">Explore Designs</a>
-                <button class="btn-secondary play-btn magnetic" data-strength="30" id="openStylist">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
-                    </svg>
-                    AI Stylist
-                </button>
-            </div>
+            <p class="hero-subtext" id="hero-subtext">
+                From majestic traditional mandaps to breathtaking modern celebrations. We craft the perfect aesthetic for your most cherished moments.
+            </p>
+            <a href="#gallery" class="hero-cta shimmer-btn" id="hero-cta">Explore Designs</a>
         </div>
+    </section>
 
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
+    <!-- Directive 4 — MARQUEE TICKER -->
+    <div class="marquee-section">
+        <div class="marquee-container">
+            <div class="marquee-row row-1" id="marquee-1">
+                <!-- Injected by JS -->
             </div>
-            <span>Scroll</span>
-        </div>
-    </header>
-
-    <div class="marquee-section relative-z">
-        <div class="marquee-content font-serif">
-            <span>⚜ VANAKAM VANDHANAM ⚜ EVENT ARTISTRY ⚜ LUXURY DESIGN ⚜ BEYOND IMAGINATION</span>
-            <span>⚜ VANAKAM VANDHANAM ⚜ EVENT ARTISTRY ⚜ LUXURY DESIGN ⚜ BEYOND IMAGINATION</span>
-            <span>⚜ VANAKAM VANDHANAM ⚜ EVENT ARTISTRY ⚜ LUXURY DESIGN ⚜ BEYOND IMAGINATION</span>
+            <div class="marquee-row row-2" id="marquee-2">
+                <!-- Injected by JS -->
+            </div>
         </div>
     </div>
 
-    <!-- Wave Divider: Hero to About -->
-    <div class="wave-divider">
-        <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
-            <path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,15 1440,30 L1440,60 L0,60Z" fill="#FFFFFF"/>
-        </svg>
-    </div>
-
-    <section id="about" class="about-section relative-z">
-        <!-- Floating Ornaments -->
-        <div class="floating-ornament" style="top:10%;left:5%;">✦</div>
-        <div class="floating-ornament" style="top:30%;right:8%;">⚜</div>
-        <div class="floating-ornament" style="bottom:15%;left:15%;">✧</div>
-        <div class="floating-ornament" style="bottom:25%;right:12%;">❋</div>
-
-        <div class="about-container reveal-on-scroll">
-            <div class="about-image tilt-card">
-                <div class="card-inner">
-                    <img src="https://i.pinimg.com/736x/23/88/a0/2388a0e1a766fc9da53acd8bf832c388.jpg"
-                        alt="About Us Decor" class="parallax-img" loading="lazy">
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-wrapper reveal-up">
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop" alt="Luxury Event" class="parallax-img">
+                    <div class="ornament" style="top: -50px; right: -50px; width: 150px; height: 150px;">
+                        <svg viewBox="0 0 100 100" fill="var(--gold)"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z" /></svg>
+                    </div>
+                </div>
+                <div class="about-content reveal-up">
+                    <h2 class="font-serif">Where Tradition Meets <span style="color: var(--gold)">Modern Grandeur</span></h2>
+                    <p>At Vanakam Vandhanam, we believe every celebration is a story waiting to be told. With years of experience in luxury event styling, we transform ordinary spaces into breathtaking realms of beauty.</p>
+                    <p>Our dedicated team specializes in everything from majestic traditional South Indian weddings to whimsical, modern birthday wonderlands. We don't just decorate; we create atmospheres that resonate with your soul.</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="500">0</div>
+                            <p>Events Perfected</p>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="12">0</div>
+                            <p>Years Experience</p>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="100">0</div>
+                            <p>Client Joy</p>
+                        </div>
+                    </div>
+                    <a href="#gallery" class="hero-cta shimmer-btn">View Our Work</a>
                 </div>
             </div>
-            <div class="about-content">
-                <h2 class="section-title reveal-on-scroll">
-                    <span class="split-parent"><span class="split-child">Crafting</span></span>
-                    <span class="split-parent"><span class="split-child italic-serif gradient-text">Timeless</span></span>
-                    <span class="split-parent"><span class="split-child">Memories</span></span>
-                </h2>
-                <p class="section-subtitle">At Vanakam Vandhanam, we believe every celebration is a story waiting to be
-                    told. With years of experience in luxury event styling, we transform ordinary spaces into
-                    breathtaking realms of beauty.</p>
-                <p class="section-subtitle">Our dedicated team specializes in everything from majestic traditional South
-                    Indian weddings to whimsical, modern birthday wonderlands. We don't just decorate; we create
-                    atmospheres that resonate with your soul.</p>
-                <a href="#gallery" class="btn-primary magnetic glow-effect mt-4" data-strength="30">View Our Work</a>
-            </div>
         </div>
     </section>
 
-    <!-- Wave Divider: About to Stats -->
-    <div class="wave-divider flip">
-        <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
-            <path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,15 1440,30 L1440,60 L0,60Z" fill="#FFFFFF"/>
-        </svg>
-    </div>
-
-    <section id="why-us" class="stats-section parallax-section relative-z">
-        <div class="stats-container stagger-reveal reveal-on-scroll">
-            <div class="stat-item magnetic" data-strength="15">
-                <h3 class="counter" data-target="500">0</h3>
-                <p>Events Perfected</p>
+    <!-- EXPERTISE SECTION -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title reveal-up">
+                <h2>Our Expertise</h2>
+                <p>Meticulous planning combined with flawless execution. We handle every petal, every light, and every detail.</p>
             </div>
-            <div class="stat-item magnetic" data-strength="15">
-                <h3 class="counter" data-target="15">0</h3>
-                <p>Years Experience</p>
-            </div>
-            <div class="stat-item magnetic" data-strength="15">
-                <h3 class="counter" data-target="100">0</h3><span>%</span>
-                <p>Client Joy</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="service-cards-section relative-z">
-        <div class="section-header text-center reveal-on-scroll">
-            <h2 class="section-title">
-                <span class="split-parent"><span class="split-child">Our Design</span></span>
-                <span class="split-parent"><span class="split-child italic-serif">Collections</span></span>
-            </h2>
-        </div>
-        <div class="service-cards-grid">
-            <div class="service-category-card reveal-on-scroll magnetic" data-strength="5">
-                <div class="scc-image"><img
-                        src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80"
-                        alt="Wedding" loading="lazy"></div>
-                <div class="scc-body">
+            <div class="services-grid">
+                <div class="service-card reveal-up">
+                    <div class="service-icon">🏛</div>
                     <h3>Wedding Decorations</h3>
                     <p>Breathtaking mandaps and stage setups that blend tradition with grandeur.</p>
-                    <div class="scc-tags"><span class="tag-grand">Grand</span><span
-                            class="tag-premium">Premium</span><span class="tag-elite">Elite</span></div>
-                    <div class="scc-sub-list">
-                        <div class="scc-sub"><img
-                                src="https://i.pinimg.com/736x/9b/7a/ea/9b7aea6560d9325ed6e696d8e1e10dcf.jpg"
-                                alt="Mandap">
-                            <div><strong>Royal Mandap Design</strong><small>Traditional pillar mandaps with heavy floral
-                                    draping.</small></div>
-                        </div>
-                        <div class="scc-sub"><img
-                                src="https://i.pinimg.com/1200x/1d/fe/da/1dfedaee26b6a9a0d1ec2b29b627ae44.jpg"
-                                alt="Aisle">
-                            <div><strong>Floral Aisle Path</strong><small>Stunning walkway lined with fresh petals and
-                                    lanterns.</small></div>
-                        </div>
-                        <div class="scc-sub"><img
-                                src="https://i.pinimg.com/1200x/dc/e3/47/dce34792339973fa7ed800ffd1f96d39.jpg"
-                                alt="Reception">
-                            <div><strong>Elite Reception Backdrop</strong><small>Modern LED and fabric mix for the
-                                    perfect reception stage.</small></div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="service-category-card reveal-on-scroll magnetic" data-strength="5">
-                <div class="scc-image"><img
-                        src="https://i.pinimg.com/736x/3f/76/54/3f76541ce9e3511547d0d53820e95a29.jpg" alt="Birthday"
-                        loading="lazy"></div>
-                <div class="scc-body">
+                <div class="service-card reveal-up">
+                    <div class="service-icon">🎈</div>
                     <h3>Birthday Decorations</h3>
                     <p>Magical themes and balloon wonderlands for every milestone.</p>
-                    <div class="scc-tags"><span class="tag-elite">Elite</span><span class="tag-grand">Grand</span><span
-                            class="tag-premium">Premium</span></div>
-                    <div class="scc-sub-list">
-                        <div class="scc-sub"><img
-                                src="https://i.pinimg.com/736x/3c/f9/c3/3cf9c3f1b8c4dc9c835dff2a2242d3f7.jpg"
-                                alt="Jungle">
-                            <div><strong>Jungle Safari Theme</strong><small>Life-size animal cutouts and lush
-                                    greenery.</small></div>
-                        </div>
-                        <div class="scc-sub"><img
-                                src="https://i.pinimg.com/736x/00/5c/a0/005ca0f451bf7a0e69900b59e8b0144a.jpg"
-                                alt="Princess">
-                            <div><strong>Princess Castle Setup</strong><small>Elegant pink and gold castle backdrop with
-                                    cloud balloons.</small></div>
-                        </div>
-                        <div class="scc-sub"><img
-                                src="https://i.pinimg.com/736x/6b/88/52/6b8852faf748a3f38fccddf64e844e77.jpg"
-                                alt="Boho">
-                            <div><strong>Minimalist Boho Birthday</strong><small>Pampas grass and subtle balloon arches
-                                    for adults.</small></div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="service-category-card reveal-on-scroll magnetic" data-strength="5">
-                <div class="scc-image"><img
-                        src="https://i.pinimg.com/736x/f3/3a/27/f33a2789f890f64fefa26f939544d1da.jpg" alt="Balloon"
-                        loading="lazy"></div>
-                <div class="scc-body">
+                <div class="service-card reveal-up">
+                    <div class="service-icon">✨</div>
                     <h3>Balloon Artistry</h3>
                     <p>Creative structures and organic garlands for dynamic visual impact.</p>
-                    <div class="scc-tags"><span class="tag-premium">Premium</span><span class="tag-elite">Elite</span>
-                    </div>
-                    <div class="scc-sub-list">
-                        <div class="scc-sub"><img
-                                src="https://i.pinimg.com/1200x/08/5d/53/085d53db0a7ee93156c02a10f5bb4dc2.jpg"
-                                alt="Garland">
-                            <div><strong>Organic Garland Arch</strong><small>Irregular sized balloons with floral
-                                    inserts.</small></div>
-                        </div>
-                        <div class="scc-sub"><img
-                                src="https://i.pinimg.com/736x/41/f9/ff/41f9ff229f6e400923f67d310eff3a6c.jpg"
-                                alt="Tunnel">
-                            <div><strong>Entrance Balloon Tunnel</strong><small>A grand walkthrough for your
-                                    guests.</small></div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="service-category-card reveal-on-scroll magnetic" data-strength="5">
-                <div class="scc-image"><img
-                        src="https://i.pinimg.com/736x/31/d2/8d/31d28d576405355ba0bcc96b657f7ef4.jpg" alt="Festival"
-                        loading="lazy"></div>
-                <div class="scc-body">
+                <div class="service-card reveal-up">
+                    <div class="service-icon">🌸</div>
                     <h3>Festival & Traditional</h3>
                     <p>Vibrant Diwali, Pongal, and home transformation setups.</p>
-                    <div class="scc-tags"><span class="tag-premium">Premium</span><span class="tag-grand">Grand</span>
-                    </div>
-                    <div class="scc-sub-list">
-                        <div class="scc-sub"><img
-                                src="https://i.pinimg.com/736x/bb/0a/9b/bb0a9bc062b25251eafe4dc79cf9dd26.jpg"
-                                alt="Marigold">
-                            <div><strong>Traditional Marigold Draping</strong><small>Classic South Indian vibe with real
-                                    marigolds.</small></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-title reveal-up">
+                <h2>Breathtaking Setups</h2>
+                <p>Filter through our breathtaking setups to find your inspiration.</p>
+            </div>
+            
+            <div class="gallery-filters reveal-up">
+                <button class="filter-btn active" data-filter="all">All Designs</button>
+                <button class="filter-btn" data-filter="wedding">Weddings</button>
+                <button class="filter-btn" data-filter="birthday">Birthdays</button>
+                <button class="filter-btn" data-filter="festive">Festive</button>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item tilt-card reveal-up" data-category="wedding">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop" alt="Royal Floral Mandap">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h4>Royal Floral Mandap</h4>
+                            <p>Traditional pillar mandaps with heavy floral draping.</p>
                         </div>
-                        <div class="scc-sub"><img
-                                src="https://i.pinimg.com/736x/d2/45/3d/d2453da4c2f91b535a3eda56c1f8b3c0.jpg"
-                                alt="Temple">
-                            <div><strong>Temple Theme Stage</strong><small>Intricate wood and floral work resembling a
-                                    temple.</small></div>
+                    </div>
+                </div>
+                <div class="gallery-item tilt-card reveal-up" data-category="birthday">
+                    <img src="https://images.unsplash.com/photo-1530103043960-ef38714abb15?q=80&w=2069&auto=format&fit=crop" alt="Magical Themes">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h4>Magical Themes</h4>
+                            <p>Balloon artistry and bespoke backdrops for milestones.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item tilt-card reveal-up" data-category="festive">
+                    <img src="https://images.unsplash.com/photo-1545232979-8bf43ea909ad?q=80&w=2070&auto=format&fit=crop" alt="Festive Grandeur">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h4>Festive Grandeur</h4>
+                            <p>Vibrant home transformations for cultural festivals.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item tilt-card reveal-up" data-category="wedding">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop" alt="Floral Aisle">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h4>Floral Aisle Walkway</h4>
+                            <p>Stunning paths lined with fresh petals and lanterns.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section id="gallery" class="gallery-section relative-z">
-        <div class="section-header text-center reveal-on-scroll">
-            <h2 class="section-title">Masterpiece <span class="italic-serif gradient-text">Collections</span></h2>
-            <p class="section-subtitle mx-auto">Filter through our breathtaking setups to find your inspiration.</p>
-
-            <div class="filter-btns">
-                <button class="filter-btn active magnetic" data-filter="all" data-strength="10">All</button>
-                <button class="filter-btn magnetic" data-filter="wedding" data-strength="10">Weddings</button>
-                <button class="filter-btn magnetic" data-filter="birthday" data-strength="10">Birthdays</button>
-                <button class="filter-btn magnetic" data-filter="festival" data-strength="10">Traditional</button>
-            </div>
-        </div>
-
-        <div class="gallery-grid">
-            <div class="gallery-card reveal-on-scroll tilt-card" data-category="wedding">
-                <div class="card-inner">
-                    <img src="https://i.pinimg.com/736x/9b/7a/ea/9b7aea6560d9325ed6e696d8e1e10dcf.jpg"
-                        alt="Royal Mandap" class="parallax-img" loading="lazy">
-                    <div class="card-overlay">
-                        <h3>Royal Floral Mandap</h3>
-                        <p>Traditional pillar mandaps with heavy floral draping.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-card reveal-on-scroll tilt-card" data-category="birthday">
-                <div class="card-inner">
-                    <img src="https://i.pinimg.com/736x/3f/76/54/3f76541ce9e3511547d0d53820e95a29.jpg" alt="Birthday"
-                        class="parallax-img" loading="lazy">
-                    <div class="card-overlay">
-                        <h3>Magical Themes</h3>
-                        <p>Balloon artistry and bespoke backdrops for milestones.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-card reveal-on-scroll tilt-card" data-category="festival">
-                <div class="card-inner">
-                    <img src="https://i.pinimg.com/736x/31/d2/8d/31d28d576405355ba0bcc96b657f7ef4.jpg" alt="Traditional"
-                        class="parallax-img" loading="lazy">
-                    <div class="card-overlay">
-                        <h3>Festive Grandeur</h3>
-                        <p>Vibrant home transformations for cultural festivals.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-card reveal-on-scroll tilt-card" data-category="wedding">
-                <div class="card-inner">
-                    <img src="https://i.pinimg.com/1200x/1d/fe/da/1dfedaee26b6a9a0d1ec2b29b627ae44.jpg" alt="Aisle Path"
-                        class="parallax-img" loading="lazy">
-                    <div class="card-overlay">
-                        <h3>Floral Aisle Walkway</h3>
-                        <p>Stunning paths lined with fresh petals and lanterns.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-card reveal-on-scroll tilt-card" data-category="festival">
-                <div class="card-inner">
-                    <img src="https://i.pinimg.com/736x/bb/0a/9b/bb0a9bc062b25251eafe4dc79cf9dd26.jpg" alt="Marigold"
-                        class="parallax-img" loading="lazy">
-                    <div class="card-overlay">
-                        <h3>Classic Marigold</h3>
-                        <p>Authentic South Indian vibes with real marigolds.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-card reveal-on-scroll tilt-card" data-category="birthday">
-                <div class="card-inner">
-                    <img src="https://i.pinimg.com/736x/3c/f9/c3/3cf9c3f1b8c4dc9c835dff2a2242d3f7.jpg" alt="Jungle"
-                        class="parallax-img" loading="lazy">
-                    <div class="card-overlay">
-                        <h3>Jungle Safari</h3>
-                        <p>Life-size cutouts and lush greenery for kids.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="custom-vision-box reveal-on-scroll">
-            <h3 class="font-serif">Have a Custom Vision?</h3>
-            <p>Our design gallery is just the beginning. We specialize in bringing unique, never-seen-before concepts to
-                life. Let's sketch your dream together.</p>
-            <a href="https://wa.me/919788742627" target="_blank" class="btn-primary magnetic"
-                data-strength="20">Collaborate with Stylist</a>
-        </div>
-    </section>
-
-    <section class="video-showcase relative-z">
-        <div class="section-header text-center reveal-on-scroll">
-            <h2 class="section-title">Cinematic <span class="italic-serif">Highlights</span></h2>
-            <p class="section-subtitle mx-auto">Watch our recent event transformations come alive.</p>
-        </div>
-        <div class="video-grid">
-            <div class="video-card reveal-on-scroll magnetic" data-strength="5">
-                <div class="video-thumb">
-                    <img src="https://i.pinimg.com/736x/ba/70/53/ba7053030e83533946c8aeefe477b8d2.jpg"
-                        alt="Wedding Reel" loading="lazy">
-                    <div class="play-overlay">
-                        <div class="play-circle">▶</div>
-                    </div>
-                    <span class="video-badge">Wedding</span>
-                </div>
-                <h4>Cinematic Entrance Highlights</h4>
-            </div>
-            <div class="video-card reveal-on-scroll magnetic" data-strength="5">
-                <div class="video-thumb">
-                    <img src="https://i.pinimg.com/1200x/39/ad/ab/39adab1a89ec9cdb19a1d0cd54c9de56.jpg"
-                        alt="Birthday Reel" loading="lazy">
-                    <div class="play-overlay">
-                        <div class="play-circle">▶</div>
-                    </div>
-                    <span class="video-badge">Birthday</span>
-                </div>
-                <h4>Neon Balloon Party Tour</h4>
-            </div>
-            <div class="video-card reveal-on-scroll magnetic" data-strength="5">
-                <div class="video-thumb">
-                    <img src="https://i.pinimg.com/736x/f2/57/23/f257237cd5f6fd6dddf9c03b78b082d1.jpg" alt="Traditional"
-                        loading="lazy">
-                    <div class="play-overlay">
-                        <div class="play-circle">▶</div>
-                    </div>
-                    <span class="video-badge">Traditional</span>
-                </div>
-                <h4>Traditional Petal Ceremony</h4>
+            <div class="gallery-cta reveal-up">
+                <h3>Have a Custom Vision?</h3>
+                <p>Our design gallery is just the beginning. We specialize in bringing unique, never-seen-before concepts to life. Let's sketch your dream together.</p>
+                <a href="https://wa.me/919788742627" class="nav-cta shimmer-btn">Collaborate with Stylist</a>
             </div>
         </div>
     </section>
 
-    <section id="services" class="services-section relative-z">
-        <div class="services-container">
-            <div class="services-text reveal-on-scroll">
-                <h2 class="section-title">Our <span class="italic-serif text-maroon">Expertise</span></h2>
-                <p class="section-subtitle">Meticulous planning combined with flawless execution. We handle every petal,
-                    every light, and every detail.</p>
+    <!-- PROCESS SECTION -->
+    <section class="process" id="why-us">
+        <div class="container">
+            <div class="section-title reveal-up">
+                <h2>Our Seamless Process</h2>
+                <p>From concept to execution, we ensure your event is flawless.</p>
             </div>
-            <div class="services-accordion reveal-on-scroll">
-                <div class="accordion-item active magnetic" data-strength="5">
-                    <div class="accordion-header">
-                        <h3>01. Event Design & Styling</h3>
-                        <div class="icon-wrapper"><span class="icon">+</span></div>
+            <div class="process-steps">
+                <div class="process-step reveal-up">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Consultation</h3>
+                        <p>We listen to your vision, understand your cultural preferences, budget, and style.</p>
                     </div>
-                    <div class="accordion-content">
-                        <p>We craft bespoke themes. From hand-picked floral selections to custom-built stage
-                            architectures, our design team ensures your event looks uniquely yours.</p>
-                    </div>
+                    <svg class="step-line" viewBox="0 0 100 20"><path d="M0 10 Q50 0 100 10" fill="none" stroke="var(--gold)" stroke-width="1" stroke-dasharray="200" stroke-dashoffset="200" /></svg>
                 </div>
-                <div class="accordion-item magnetic" data-strength="5">
-                    <div class="accordion-header">
-                        <h3>02. Venue Transformation</h3>
-                        <div class="icon-wrapper"><span class="icon">+</span></div>
+                <div class="process-step reveal-up">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Design & Concept</h3>
+                        <p>Our stylists create mood boards and 3D renders of your bespoke decoration plan.</p>
                     </div>
-                    <div class="accordion-content">
-                        <p>We turn empty halls into majestic palaces. Utilizing advanced draping, intelligent lighting,
-                            and structural artistry.</p>
-                    </div>
+                    <svg class="step-line" viewBox="0 0 100 20"><path d="M0 10 Q50 20 100 10" fill="none" stroke="var(--gold)" stroke-width="1" stroke-dasharray="200" stroke-dashoffset="200" /></svg>
                 </div>
-                <div class="accordion-item magnetic" data-strength="5">
-                    <div class="accordion-header">
-                        <h3>03. Immersive Balloon Artistry</h3>
-                        <div class="icon-wrapper"><span class="icon">+</span></div>
+                <div class="process-step reveal-up">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Crafting & Setup</h3>
+                        <p>Our team arrives early and transforms your venue into a breathtaking masterpiece.</p>
                     </div>
-                    <div class="accordion-content">
-                        <p>Organic balloon garlands, massive entrance tunnels, and whimsical setups perfect for
-                            birthdays and casual celebrations.</p>
+                    <svg class="step-line" viewBox="0 0 100 20"><path d="M0 10 Q50 0 100 10" fill="none" stroke="var(--gold)" stroke-width="1" stroke-dasharray="200" stroke-dashoffset="200" /></svg>
+                </div>
+                <div class="process-step reveal-up">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3>Grand Reveal</h3>
+                        <p>You walk in to perfection. We handle teardown so you focus on celebrating.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="process-section relative-z">
-        <div class="section-header text-center reveal-on-scroll">
-            <h2 class="section-title">
-                <span class="split-parent"><span class="split-child">How The</span></span>
-                <span class="split-parent"><span class="split-child italic-serif gradient-text">Magic</span></span>
-                <span class="split-parent"><span class="split-child">Happens</span></span>
-            </h2>
-            <p class="section-subtitle mx-auto">Our seamless 4-step process ensures your event is flawless from concept
-                to execution.</p>
-        </div>
-        <div class="process-grid stagger-reveal reveal-on-scroll">
-            <div class="process-step reveal-on-scroll magnetic" data-strength="8">
-                <div class="step-number">01</div>
-                <h3>Consultation</h3>
-                <p>We listen to your vision, understand your cultural preferences, budget, and style.</p>
+    <!-- PRICING SECTION -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title reveal-up">
+                <h2>Investment</h2>
+                <p>Transparent pricing for premium transformations. Fully customizable to your needs.</p>
             </div>
-            <div class="process-step reveal-on-scroll magnetic" data-strength="8">
-                <div class="step-number">02</div>
-                <h3>Design & Concept</h3>
-                <p>Our stylists create mood boards and 3D renders of your bespoke decoration plan.</p>
-            </div>
-            <div class="process-step reveal-on-scroll magnetic" data-strength="8">
-                <div class="step-number">03</div>
-                <h3>Crafting & Setup</h3>
-                <p>Our team arrives early and transforms your venue into a breathtaking masterpiece.</p>
-            </div>
-            <div class="process-step reveal-on-scroll magnetic" data-strength="8">
-                <div class="step-number">04</div>
-                <h3>Grand Reveal</h3>
-                <p>You walk in to perfection. We handle teardown so you focus on celebrating.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="vision-parallax relative-z">
-        <div class="vision-content reveal-on-scroll">
-            <h2 class="font-serif">"We don't just decorate spaces; we curate <span class="italic-serif text-gold">atmospheric poetry</span> for your most precious milestones."</h2>
-        </div>
-    </section>
-
-    <section class="journal-section relative-z">
-        <div class="section-header text-center reveal-on-scroll">
-            <h2 class="section-title">
-                <span class="split-parent"><span class="split-child">The</span></span>
-                <span class="split-parent"><span class="split-child italic-serif">Journal</span></span>
-            </h2>
-            <p class="section-subtitle mx-auto">Insights into luxury event trends, color palettes, and cultural artistry.</p>
-        </div>
-        <div class="journal-grid">
-            <article class="journal-card reveal-on-scroll">
-                <div class="journal-img-box">
-                    <img src="https://i.pinimg.com/736x/bb/0a/9b/bb0a9bc062b25251eafe4dc79cf9dd26.jpg" alt="Trends">
-                    <span class="journal-date">APR 2024</span>
+            <div class="pricing-grid">
+                <div class="pricing-card reveal-up shimmer-btn">
+                    <h3>Intimate Bliss</h3>
+                    <div class="price">Standard</div>
+                    <ul>
+                        <li>Standard Backdrop Design</li>
+                        <li>Premium Artificial Florals</li>
+                        <li>LED Spot Lighting</li>
+                        <li>Cake Table Styling</li>
+                        <li>2-Person Setup Team</li>
+                    </ul>
+                    <a href="https://wa.me/919788742627" class="nav-cta">Select Package</a>
                 </div>
-                <div class="journal-info">
-                    <h3>2024 Wedding Color Palettes: Beyond Traditional Maroon</h3>
-                    <p>Exploring the rise of sage green, burnt orange, and ivory in South Indian ceremonies...</p>
-                    <a href="#" class="read-more">Read Entry <span>→</span></a>
+                <div class="pricing-card grand-card reveal-up shimmer-btn">
+                    <div class="popular-tag">Most Popular</div>
+                    <h3>Cultural Heritage</h3>
+                    <div class="price">Premium</div>
+                    <ul>
+                        <li>Full Mandap / Stage Decor</li>
+                        <li>Mix of Fresh & Silk Flowers</li>
+                        <li>Custom Entrance Arch</li>
+                        <li>Venue Mood Lighting</li>
+                        <li>Full Setup & Teardown</li>
+                        <li>Dedicated Project Lead</li>
+                    </ul>
+                    <a href="https://wa.me/919788742627" class="nav-cta">Select Package</a>
                 </div>
-            </article>
-            <article class="journal-card reveal-on-scroll">
-                <div class="journal-img-box">
-                    <img src="https://i.pinimg.com/736x/d2/45/3d/d2453da4c2f91b535a3eda56c1f8b3c0.jpg" alt="Craft">
-                    <span class="journal-date">MAR 2024</span>
-                </div>
-                <div class="journal-info">
-                    <h3>The Art of Temple Theme Stages: A Craft Revival</h3>
-                    <p>How modern artisans are recreating ancient architectural wonders for the big stage...</p>
-                    <a href="#" class="read-more">Read Entry <span>→</span></a>
-                </div>
-            </article>
-            <article class="journal-card reveal-on-scroll">
-                <div class="journal-img-box">
-                    <img src="https://i.pinimg.com/736x/6b/88/52/6b8852faf748a3f38fccddf64e844e77.jpg" alt="Modern">
-                    <span class="journal-date">FEB 2024</span>
-                </div>
-                <div class="journal-info">
-                    <h3>Minimalist Birthdays: When 'Less' Creates More Magic</h3>
-                    <p>The shift towards boho-chic, pampas grass, and subtle organic balloon artistry...</p>
-                    <a href="#" class="read-more">Read Entry <span>→</span></a>
-                </div>
-            </article>
-        </div>
-    </section>
-
-    <section class="testimonials-section relative-z">
-        <div class="section-header text-center reveal-on-scroll">
-            <h2 class="section-title">
-                <span class="split-parent"><span class="split-child">Words From</span></span>
-                <span class="split-parent"><span class="split-child italic-serif">Happy Hearts</span></span>
-            </h2>
-            <p class="section-subtitle mx-auto">Real stories from families who trusted us with their most precious
-                moments.</p>
-        </div>
-        <div class="testimonials-track" id="testimonialTrack">
-            <div class="testimonial-card reveal-on-scroll">
-                <div class="stars">★★★★★</div>
-                <p>"The mandap was beyond our dreams. Every guest was in awe. Vanakam Vandhanam turned our wedding into
-                    a fairy tale."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">P</div>
-                    <div><strong>Priya & Karthik</strong><span>Wedding — Chennai</span></div>
-                </div>
-            </div>
-            <div class="testimonial-card reveal-on-scroll">
-                <div class="stars">★★★★★</div>
-                <p>"My daughter's Jungle Safari birthday was magical! The life-size cutouts and balloon tunnel left the
-                    kids speechless."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">S</div>
-                    <div><strong>Sanjay Ramanathan</strong><span>Birthday — Coimbatore</span></div>
-                </div>
-            </div>
-            <div class="testimonial-card reveal-on-scroll">
-                <div class="stars">★★★★★</div>
-                <p>"They transformed our home for Diwali like never before. The marigold draping and brass diyas were
-                    absolutely stunning."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">M</div>
-                    <div><strong>Meena Sundaram</strong><span>Festival — Madurai</span></div>
+                <div class="pricing-card reveal-up shimmer-btn">
+                    <h3>Royal Signature</h3>
+                    <div class="price">Elite</div>
+                    <ul>
+                        <li>Ultra-Premium Theme Design</li>
+                        <li>100% Exotic Fresh Florals</li>
+                        <li>3D Projection Mapping</li>
+                        <li>Bespoke Furniture Rental</li>
+                        <li>VIP Guest Lounge Styling</li>
+                        <li>On-site Event Coordinator</li>
+                    </ul>
+                    <a href="https://wa.me/919788742627" class="nav-cta">Select Package</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="faq-section relative-z">
-        <div class="faq-container">
-            <div class="faq-left reveal-on-scroll">
-                <h2 class="section-title">
-                    <span class="split-parent"><span class="split-child">Frequently</span></span>
-                    <span class="split-parent"><span class="split-child italic-serif text-maroon">Asked</span></span>
-                </h2>
-                <p class="section-subtitle">Everything you need to know before booking your dream event decoration.</p>
-                <a href="https://wa.me/919788742627" target="_blank" class="btn-primary magnetic"
-                    data-strength="20">Still Have Questions?</a>
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials reveal-up">
+        <div class="container">
+            <div class="section-title">
+                <h2>Words From Happy Hearts</h2>
+                <p>Real stories from families who trusted us with their most precious moments.</p>
             </div>
-            <div class="faq-right reveal-on-scroll">
+            <div class="testimonial-carousel" id="testimonial-carousel">
+                <div class="testimonial-card">
+                    <p>"The mandap was beyond our dreams. Every guest was in awe. Vanakam Vandhanam turned our wedding into a fairy tale."</p>
+                    <div class="author">- Karthik & Priya</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"My daughter's Jungle Safari birthday was magical! The life-size cutouts and balloon tunnel left the kids speechless."</p>
+                    <div class="author">- Mrs. Anitha</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"They transformed our home for Diwali like never before. The marigold draping and brass diyas were absolutely stunning."</p>
+                    <div class="author">- Rajesh Kumar</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq reveal-up" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked</h2>
+            </div>
+            <div class="faq-accordion">
                 <div class="faq-item">
                     <div class="faq-header">
-                        <h3>How far in advance should I book?</h3><span class="faq-icon">+</span>
+                        <h3>How far in advance should I book?</h3>
+                        <span class="faq-icon">+</span>
                     </div>
-                    <div class="faq-answer">
-                        <p>We recommend booking at least 2–4 weeks in advance for birthdays and 1–3 months for weddings
-                            to ensure availability and allow time for custom design work.</p>
+                    <div class="faq-body">
+                        <p>We recommend booking at least 2–4 weeks in advance for birthdays and 1–3 months for weddings to ensure availability and allow time for custom design work.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-header">
-                        <h3>Do you provide floral and balloon services?</h3><span class="faq-icon">+</span>
+                        <h3>Do you provide floral and balloon services?</h3>
+                        <span class="faq-icon">+</span>
                     </div>
-                    <div class="faq-answer">
-                        <p>Yes! We offer fresh floral arrangements, artificial flower setups, organic balloon garlands,
-                            entrance arches, and full venue transformation packages.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-header">
-                        <h3>What areas do you serve?</h3><span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>We primarily serve Tamil Nadu — Chennai, Coimbatore, Madurai, Trichy, and surrounding areas.
-                            We also take destination event bookings across South India.</p>
+                    <div class="faq-body">
+                        <p>Yes! We offer fresh floral arrangements, artificial flower setups, organic balloon garlands, entrance arches, and full venue transformation packages.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-header">
-                        <h3>Can I customize the decoration theme?</h3><span class="faq-icon">+</span>
+                        <h3>What areas do you serve?</h3>
+                        <span class="faq-icon">+</span>
                     </div>
-                    <div class="faq-answer">
-                        <p>Absolutely! Every event is fully bespoke. Share your Pinterest boards, color palettes, or
-                            just describe your dream — we'll bring it to life.</p>
+                    <div class="faq-body">
+                        <p>We primarily serve Tamil Nadu — Chennai, Coimbatore, Madurai, Trichy, and surrounding areas. We also take destination event bookings across South India.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="partners-section relative-z">
-        <div class="section-header text-center reveal-on-scroll">
-            <p class="badge magnetic text-maroon" data-strength="15" style="background: rgba(128,0,0,0.05); border-color: rgba(128,0,0,0.1); font-weight: 700;">Elite Venue Partners</p>
-            <div class="header-line"></div>
-        </div>
-        <div class="marquee partners-marquee">
-            <div class="marquee-content partners-track">
-                <span>RITZ CARLTON</span><span>•</span><span>THE LEELA PALACE</span><span>•</span><span>TAJ HOTELS</span><span>•</span><span>FOUR SEASONS</span><span>•</span><span>LE MERIDIEN</span><span>•</span><span>OBEROI HOTELS</span><span>•</span><span>ITC GRAND CHOLA</span><span>•</span><span>JW MARRIOTT</span><span>•</span><span>HYATT REGENCY</span><span>•</span><span>SHERATON</span><span>•</span>
-                <span>RITZ CARLTON</span><span>•</span><span>THE LEELA PALACE</span><span>•</span><span>TAJ HOTELS</span><span>•</span><span>FOUR SEASONS</span><span>•</span><span>LE MERIDIEN</span><span>•</span><span>OBEROI HOTELS</span><span>•</span><span>ITC GRAND CHOLA</span><span>•</span><span>JW MARRIOTT</span><span>•</span><span>HYATT REGENCY</span><span>•</span><span>SHERATON</span><span>•</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="pricing-section relative-z">
-        <div class="section-header text-center reveal-on-scroll">
-            <h2 class="section-title">
-                <span class="split-parent"><span class="split-child">Investment</span></span>
-                <span class="split-parent"><span class="split-child italic-serif">Packages</span></span>
-            </h2>
-            <p class="section-subtitle mx-auto">Transparent pricing for premium transformations. Fully customizable to your needs.</p>
-        </div>
-        <div class="pricing-grid">
-            <div class="pricing-card reveal-on-scroll">
-                <div class="pricing-badge">Essential</div>
-                <h3>Intimate Bliss</h3>
-                <div class="price">₹25,000<span>+</span></div>
-                <ul>
-                    <li>Standard Backdrop Design</li>
-                    <li>Premium Artificial Florals</li>
-                    <li>LED Spot Lighting</li>
-                    <li>Cake Table Styling</li>
-                    <li>2-Person Setup Team</li>
-                </ul>
-                <a href="https://wa.me/919788742627" target="_blank" class="btn-primary w-full magnetic" data-strength="15">Select Package</a>
-            </div>
-            <div class="pricing-card reveal-on-scroll popular">
-                <div class="pricing-tag">Most Popular</div>
-                <div class="pricing-badge">Grand</div>
-                <h3>Cultural Heritage</h3>
-                <div class="price">₹75,000<span>+</span></div>
-                <ul>
-                    <li>Full Mandap / Stage Decor</li>
-                    <li>Mix of Fresh & Silk Flowers</li>
-                    <li>Custom Entrance Arch</li>
-                    <li>Venue Mood Lighting</li>
-                    <li>Full Setup & Teardown</li>
-                    <li>Dedicated Project Lead</li>
-                </ul>
-                <a href="https://wa.me/919788742627" target="_blank" class="btn-primary w-full magnetic" data-strength="15">Select Package</a>
-            </div>
-            <div class="pricing-card reveal-on-scroll">
-                <div class="pricing-badge">Elite</div>
-                <h3>Royal Signature</h3>
-                <div class="price">₹1,50,000<span>+</span></div>
-                <ul>
-                    <li>Ultra-Premium Theme Design</li>
-                    <li>100% Exotic Fresh Florals</li>
-                    <li>3D Projection Mapping</li>
-                    <li>Bespoke Furniture Rental</li>
-                    <li>VIP Guest Lounge Styling</li>
-                    <li>On-site Event Coordinator</li>
-                </ul>
-                <a href="https://wa.me/919788742627" target="_blank" class="btn-primary w-full magnetic" data-strength="15">Select Package</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="cta-section relative-z">
-        <div class="cta-container reveal-on-scroll">
-            <div class="cta-bg-text font-serif">DECOR</div>
-            <div class="cta-content">
-                <h2 class="cta-title">Plan Your <span class="italic-serif text-gold">Dream</span> Event</h2>
-                <p class="cta-subtitle">From majestic mandaps to whimsical birthdays, we bring your imagination to life.
-                </p>
-                <a href="https://wa.me/919788742627" target="_blank" class="btn-primary btn-large magnetic glow-effect"
-                    data-strength="40">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" style="margin-right: 10px;">
-                        <path
-                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-                    </svg>
-                    Request Custom Quote
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer relative-z">
-        <div class="footer-bg-animation"></div>
-        <div class="footer-top">
-            <div class="footer-brand reveal-on-scroll">
-                <h2 class="font-serif">வணக்கம் <span class="text-gold">வந்தனம்</span></h2>
-                <p>Crafting memories that last a lifetime with the rich heritage and modern luxury of event design.</p>
-            </div>
-            <div class="footer-links reveal-on-scroll">
-                <h3>Quick Links</h3>
-                <a href="#gallery" class="magnetic" data-strength="10">Gallery</a>
-                <a href="#services" class="magnetic" data-strength="10">Services</a>
-                <a href="#" class="magnetic" data-strength="10">Contact Us</a>
-            </div>
-            <div class="footer-contact reveal-on-scroll">
-                <h3>Connect</h3>
-                <p>Email: hello@vanakamvandhanam.com</p>
-                <p>Phone: +91 97887 42627</p>
-                <div class="social-icons">
-                    <a href="#" class="magnetic" data-strength="20">IG</a>
-                    <a href="#" class="magnetic" data-strength="20">FB</a>
-                    <a href="#" class="magnetic" data-strength="20">WA</a>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2 class="font-serif">வணக்கம் வந்தனம்</h2>
+                    <p>Crafting memories that last a lifetime with the rich heritage and modern luxury of event design.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <a href="#gallery">Gallery</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact Us</a>
+                </div>
+                <div class="footer-contact">
+                    <h3>Connect</h3>
+                    <p>Email: hello@vanakamvandhanam.com</p>
+                    <p>Phone: +91 97887 42627</p>
+                    <div class="social-links">
+                        <a href="#">IG</a>
+                        <a href="#">FB</a>
+                        <a href="#">WA</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Vanakam Vandhanam Events. All Rights Reserved.</p>
+            <div class="footer-bottom">
+                <p>© 2026 Vanakam Vandhanam Events. All Rights Reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- AI Stylist Modal -->
-    <div class="modal-overlay" id="stylistModal">
-        <div class="modal-content">
-            <button class="close-modal magnetic" data-strength="15">&times;</button>
-            <div class="modal-header">
-                <svg viewBox="0 0 24 24" width="28" height="28" fill="var(--accent-gold)">
-                    <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
-                </svg>
-                <h3>Smart AI Stylist</h3>
-            </div>
-            <div class="modal-body" id="modalBody">
-                <p class="italic">Describe your dream event, and let our AI suggest concepts.</p>
-                <div class="input-group">
-                    <label>Event Type</label>
-                    <input type="text" id="aiEvent" placeholder="e.g. Traditional Outdoor Wedding">
-                </div>
-                <div class="input-group">
-                    <label>Palette & Vibe</label>
-                    <input type="text" id="aiPalette" placeholder="e.g. Royal Maroon & Gold">
-                </div>
-                <button class="btn-primary w-full magnetic" data-strength="20" id="generateBtn">Generate Magic</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/919788742627" target="_blank" class="floating-wa magnetic" data-strength="30">
-        <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-        </svg>
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/919788742627" class="wa-float" target="_blank">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff"><path d="M12.031 6.172c-2.32 0-4.519.903-6.16 2.544-3.4 3.399-3.4 8.922 0 12.321 1.012 1.012 2.242 1.737 3.559 2.101l-1.025 3.738 3.861-1.013c1.238.334 2.535.508 3.765.508 2.32 0 4.519-.903 6.16-2.544 3.4-3.399 3.4-8.922 0-12.321-1.641-1.641-3.84-2.544-6.16-2.544zm5.109 11.512c-.223.633-1.108 1.152-1.534 1.226-.425.074-.836.143-2.614-.541-2.274-.873-3.737-3.189-3.848-3.336-.113-.146-.913-1.213-.913-2.31 0-1.096.574-1.636.78-1.856.206-.219.447-.274.596-.274.148 0 .296.002.424.008.134.006.314-.05.49.37.185.441.635 1.545.69 1.656.056.111.093.24.019.387-.074.148-.112.241-.223.369-.111.127-.233.284-.333.383-.111.111-.227.232-.098.452.129.22.573.946 1.231 1.531.848.756 1.564 1.002 1.787 1.113.223.111.353.093.483-.056.13-.149.557-.648.705-.87.148-.223.296-.185.49-.111.196.074 1.242.585 1.455.694.214.111.352.167.408.26.056.092.056.536-.167 1.169z"/></svg>
     </a>
 
-    <!-- Image Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" id="lightboxClose">&times;</button>
-        <img src="" alt="Lightbox" id="lightboxImg">
-        <div class="lightbox-caption" id="lightboxCaption"></div>
-    </div>
+    <script>
+        // Directive 1 — PAGE LOADER logic
+        const loaderText = document.getElementById('loader-text');
+        const brandName = "வணக்கம் வந்தனம்";
+        brandName.split('').forEach((char, i) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.style.animationDelay = `${0.4 + i * 0.08}s`;
+            loaderText.appendChild(span);
+        });
 
-    <!-- Back to Top -->
-    <button class="back-to-top" id="backToTop">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="18 15 12 9 6 15" />
-        </svg>
-    </button>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('fade-out');
+                initHeroAnimations();
+            }, 2000);
+        });
 
-    <script src="./script.js"></script>
+        // Directive 2 — HERO ANIMATIONS
+        function initHeroAnimations() {
+            const headline = document.getElementById('hero-headline');
+            const text = "CELEBRATE with TIMELESS ELEGANCE";
+            text.split(' ').forEach((word, i) => {
+                const span = document.createElement('span');
+                span.textContent = word;
+                span.style.animationDelay = `${i * 0.12}s`;
+                span.classList.add('reveal');
+                headline.appendChild(span);
+            });
+
+            setTimeout(() => {
+                document.getElementById('hero-subtext').classList.add('reveal');
+                document.getElementById('hero-cta').classList.add('reveal');
+            }, 400);
+
+            createParticles();
+        }
+
+        function createParticles() {
+            const container = document.getElementById('hero-particles');
+            for (let i = 0; i < 40; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 3 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                const duration = 4 + Math.random() * 4;
+                const delay = Math.random() * 5;
+                
+                particle.animate([
+                    { opacity: 0, transform: 'translateY(0) translateX(0)' },
+                    { opacity: 0.6, transform: `translateY(-100px) translateX(${Math.random() * 40 - 20}px)` },
+                    { opacity: 0, transform: `translateY(-200px) translateX(${Math.random() * 60 - 30}px)` }
+                ], {
+                    duration: duration * 1000,
+                    delay: delay * 1000,
+                    iterations: Infinity,
+                    easing: 'ease-in-out'
+                });
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Directive 3 — NAVBAR & PROGRESS BAR
+        const navbar = document.querySelector('.navbar');
+        const progress = document.getElementById('scroll-progress');
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            if (scrolled > 60) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolledPct = (winScroll / height) * 100;
+            progress.style.width = scrolledPct + "%";
+        }, { passive: true });
+
+        // Directive 4 — MARQUEE TICKER
+        const m1 = document.getElementById('marquee-1');
+        const m2 = document.getElementById('marquee-2');
+        const marqueeContent = '<span>⚜</span> VANAKAM VANDHANAM <span>⚜</span> EVENT ARTISTRY ';
+        m1.innerHTML = marqueeContent.repeat(10);
+        m2.innerHTML = marqueeContent.repeat(10);
+
+        // Directive 7 — CUSTOM CURSOR
+        const cursor = document.getElementById('cursor');
+        const aura = document.getElementById('cursor-aura');
+        let mouseX = 0, mouseY = 0;
+        let auraX = 0, auraY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        });
+
+        function animateAura() {
+            auraX += (mouseX - auraX) * 0.1;
+            auraY += (mouseY - auraY) * 0.1;
+            aura.style.left = (auraX - 18) + 'px';
+            aura.style.top = (auraY - 18) + 'px';
+            requestAnimationFrame(animateAura);
+        }
+        animateAura();
+
+        document.querySelectorAll('a, button, .tilt-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hovered');
+                aura.classList.add('hovered');
+                if (el.classList.contains('gallery-item')) {
+                    aura.textContent = 'VIEW';
+                } else {
+                    aura.textContent = '';
+                }
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hovered');
+                aura.classList.remove('hovered');
+                aura.textContent = '';
+            });
+        });
+
+        // Directive 5 — INTERSECTION OBSERVER
+        const revealOptions = {
+            threshold: 0.12,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    if (entry.target.classList.contains('stat-number')) {
+                        startStatsCounter(entry.target);
+                    }
+                    
+                    if (entry.target.classList.contains('process-step')) {
+                        const line = entry.target.querySelector('.step-line path');
+                        if (line) line.style.strokeDashoffset = '0';
+                    }
+
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+
+        document.querySelectorAll('.reveal-up, .stat-number, .process-step').forEach(el => observer.observe(el));
+
+        // Stats Counter Logic
+        function startStatsCounter(el) {
+            const target = parseInt(el.getAttribute('data-target'));
+            let count = 0;
+            const duration = 2200;
+            const increment = target / (duration / 16);
+            
+            const updateCount = () => {
+                count += increment;
+                if (count < target) {
+                    el.textContent = Math.floor(count);
+                    requestAnimationFrame(updateCount);
+                } else {
+                    el.textContent = target + "+";
+                }
+            };
+            updateCount();
+        }
+
+        // Directive 6 — 3D TILT EFFECT
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            const specular = document.createElement('div');
+            specular.className = 'specular';
+            card.appendChild(specular);
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -8;
+                const rotateY = ((x - centerX) / centerX) * 8;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                specular.style.setProperty('--x', `${x}px`);
+                specular.style.setProperty('--y', `${y}px`);
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+                card.style.transition = 'transform 0.6s cubic-bezier(.34,1.56,.64,1)';
+                setTimeout(() => card.style.transition = '', 600);
+            });
+        });
+
+        // Gallery Filters
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                galleryItems.forEach((item, i) => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, i * 60);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.9)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 400);
+                    }
+                });
+            });
+        });
+
+        // Directive 9 — TESTIMONIAL MOMENTUM DRAG
+        const carousel = document.getElementById('testimonial-carousel');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let velocity = 0;
+        let rafID;
+
+        carousel.addEventListener('mousedown', (e) => {
+            isDown = true;
+            carousel.classList.add('active');
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+            cancelAnimationFrame(rafID);
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        carousel.addEventListener('mouseup', () => {
+            isDown = false;
+            applyMomentum();
+        });
+
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 2;
+            const prevScrollLeft = carousel.scrollLeft;
+            carousel.scrollLeft = scrollLeft - walk;
+            velocity = carousel.scrollLeft - prevScrollLeft;
+        });
+
+        function applyMomentum() {
+            if (Math.abs(velocity) > 0.5) {
+                carousel.scrollLeft += velocity;
+                velocity *= 0.95;
+                rafID = requestAnimationFrame(applyMomentum);
+            }
+        }
+
+        // FAQ ACCORDION
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // Parallax Effect for About Image
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.parallax-img').forEach(img => {
+                const rect = img.parentElement.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const speed = 0.15;
+                    const yPos = (rect.top * speed);
+                    img.style.transform = `translateY(${yPos}px)`;
+                }
+            });
+        }, { passive: true });
+
+        // Directive 8 — RIPPLE EFFECT
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.shimmer-btn, .hero-cta, .nav-cta, .nav-links a, .filter-btn');
+            if (btn) {
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                const rect = btn.getBoundingClientRect();
+                ripple.style.left = (e.clientX - rect.left) + 'px';
+                ripple.style.top = (e.clientY - rect.top) + 'px';
+                btn.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            }
+        });
+
+        // Initialize Process Lines
+        document.querySelectorAll('.step-line path').forEach(path => {
+            const length = path.getTotalLength();
+            path.style.strokeDasharray = length;
+            path.style.strokeDashoffset = length;
+            path.style.transition = 'stroke-dashoffset 1.5s ease-out';
+        });
+
+        // Enhanced Cursor Interactions
+        function updateCursorInteractions() {
+            document.querySelectorAll('a, button, .tilt-card, .filter-btn, .faq-header').forEach(el => {
+                if (el.dataset.cursorBound) return;
+                el.dataset.cursorBound = "true";
+                
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hovered');
+                    aura.classList.add('hovered');
+                    if (el.classList.contains('gallery-item')) {
+                        aura.textContent = 'VIEW';
+                    } else if (el.tagName === 'A' && el.href && el.href.includes('wa.me')) {
+                        aura.textContent = 'OPEN';
+                    } else {
+                        aura.textContent = '';
+                    }
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hovered');
+                    aura.classList.remove('hovered');
+                    aura.textContent = '';
+                });
+            });
+        }
+        updateCursorInteractions();
+
+        // Re-run cursor update when filters change
+        const filterContainer = document.querySelector('.gallery-grid');
+        if (filterContainer) {
+            const filterObserver = new MutationObserver(updateCursorInteractions);
+            filterObserver.observe(filterContainer, { childList: true });
+        }
+    </script>
 </body>
-
 </html>
