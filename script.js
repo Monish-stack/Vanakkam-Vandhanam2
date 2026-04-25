@@ -1,67 +1,82 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Loader Animation
-    setTimeout(() => {
+    // 1. Loader Animation (Safety first)
+    const hideLoader = () => {
         const loader = document.querySelector('.loader');
         if (loader) {
             loader.classList.add('hidden');
-            setTimeout(() => loader.remove(), 1500);
+            setTimeout(() => { if(loader.parentNode) loader.remove(); }, 1500);
         }
         triggerHeroAnimations();
-    }, 2000);
+    };
 
-    // 2. Custom Cursor
-    const cursor = document.querySelector('.cursor');
-    const cursorFollower = document.querySelector('.cursor-follower');
-    
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        
-        // Use requestAnimationFrame for follower to avoid jank
-        requestAnimationFrame(() => {
-            // A bit of lag for the follower
-            setTimeout(() => {
-                cursorFollower.style.left = e.clientX + 'px';
-                cursorFollower.style.top = e.clientY + 'px';
-            }, 50);
-        });
+    // Force loader removal after 5 seconds as absolute fallback
+    setTimeout(hideLoader, 5000);
+
+    // Standard loader removal
+    window.addEventListener('load', () => {
+        setTimeout(hideLoader, 1000);
     });
 
-    // Hover states for cursor
-    const interactiveSelectors = 'a, button, .gallery-card, .accordion-header, .filter-btn, .close-modal, .floating-wa';
-    document.querySelectorAll(interactiveSelectors).forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.classList.add('hovered');
-            cursorFollower.classList.add('hovered');
+    // 2. Advanced Hover Image Reveal for Services
+    const hoverPreviewImg = document.getElementById('hoverPreviewImg');
+    
+    document.addEventListener('mousemove', (e) => {
+        if (hoverPreviewImg && hoverPreviewImg.classList.contains('active')) {
+            hoverPreviewImg.style.left = e.clientX + 'px';
+            hoverPreviewImg.style.top = e.clientY + 'px';
+        }
+    });
+
+    document.querySelectorAll('.scc-sub').forEach(item => {
+        const imgSource = item.querySelector('img').src;
+        item.addEventListener('mouseenter', () => {
+            if (hoverPreviewImg) {
+                hoverPreviewImg.src = imgSource;
+                hoverPreviewImg.classList.add('active');
+            }
         });
-        el.addEventListener('mouseleave', () => {
-            cursor.classList.remove('hovered');
-            cursorFollower.classList.remove('hovered');
+        item.addEventListener('mouseleave', () => {
+            if (hoverPreviewImg) {
+                hoverPreviewImg.classList.remove('active');
+            }
         });
     });
 
     // 3. Magnetic Buttons
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     const magnetics = document.querySelectorAll('.magnetic');
-    magnetics.forEach(btn => {
-        btn.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const strength = this.getAttribute('data-strength') || 20;
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
+    
+    if (!isTouchDevice) {
+        magnetics.forEach(btn => {
+            btn.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const strength = this.getAttribute('data-strength') || 20;
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                this.style.transform = `translate(${x / rect.width * strength}px, ${y / rect.height * strength}px)`;
+            });
             
-            this.style.transform = `translate(${x / rect.width * strength}px, ${y / rect.height * strength}px)`;
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = `translate(0px, 0px)`;
+            });
         });
-        
-        btn.addEventListener('mouseleave', function() {
-            this.style.transform = `translate(0px, 0px)`;
-        });
-    });
+    }
 
     // 4. Hero Animations (Triggered after loader)
     function triggerHeroAnimations() {
         const lineContents = document.querySelectorAll('.line-content');
         lineContents.forEach((el, index) => {
-            setTimeout(() => el.classList.add('visible'), index * 200 + 300);
+            el.style.transform = 'translateY(100%) rotateX(-20deg)';
+            el.style.opacity = '0';
+            el.style.transformOrigin = 'top center';
+            el.style.transition = `transform 1s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.2 + 0.3}s, opacity 1s ease ${index * 0.2 + 0.3}s`;
+            
+            setTimeout(() => {
+                el.style.transform = 'translateY(0) rotateX(0deg)';
+                el.style.opacity = '1';
+                el.classList.add('visible');
+            }, 50);
         });
 
         const fadeUps = document.querySelectorAll('.hero-content .reveal-text');
@@ -79,19 +94,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const animateCounter = (el) => {
         const target = +el.getAttribute('data-target');
         const duration = 2500;
-        const increment = target / (duration / 16);
-        let current = 0;
+        const startTime = performance.now();
 
-        const updateCounter = () => {
-            current += increment;
-            if (current < target) {
-                el.innerText = Math.ceil(current) + (target === 100 ? '' : '+');
+        const easeOutExpo = (t) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+
+        const updateCounter = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easedProgress = easeOutExpo(progress);
+            const current = Math.ceil(easedProgress * target);
+
+            el.innerText = current + (target === 100 ? '' : '+');
+
+            if (progress < 1) {
                 requestAnimationFrame(updateCounter);
-            } else {
-                el.innerText = target + (target === 100 ? '' : '+');
             }
         };
-        updateCounter();
+        requestAnimationFrame(updateCounter);
     };
 
     const scrollObserver = new IntersectionObserver((entries, observer) => {
@@ -107,18 +126,44 @@ document.addEventListener('DOMContentLoaded', () => {
                         counter.classList.add('counted');
                     }
                 });
+
+                // Trigger stat underlines
+                const statItems = entry.target.querySelectorAll('.stat-item');
+                statItems.forEach((item, i) => {
+                    setTimeout(() => item.classList.add('visible'), i * 200);
+                });
                 
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.reveal-on-scroll').forEach(el => scrollObserver.observe(el));
+    document.querySelectorAll('.reveal-on-scroll, .stagger-reveal').forEach(el => scrollObserver.observe(el));
 
-    // 6. 3D Tilt Effect on Gallery Cards
+    // Interactive Card Glow Tracking (mouse-following highlight)
+    document.querySelectorAll('.service-category-card, .journal-card, .pricing-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            card.style.setProperty('--mouse-x', x + '%');
+            card.style.setProperty('--mouse-y', y + '%');
+        });
+    });
+
+
+    // 6. 3D Tilt Effect on Gallery Cards with Glare
     const tiltCards = document.querySelectorAll('.tilt-card');
     tiltCards.forEach(card => {
         const inner = card.querySelector('.card-inner');
+        
+        // Add glare element if not exists
+        let glare = inner.querySelector('.glare');
+        if (!glare) {
+            glare = document.createElement('div');
+            glare.className = 'glare';
+            inner.appendChild(glare);
+        }
         
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
@@ -128,37 +173,80 @@ document.addEventListener('DOMContentLoaded', () => {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg
-            const rotateY = ((x - centerX) / centerX) * 10;
+            const rotateX = ((y - centerY) / centerY) * -15; // Max 15 deg
+            const rotateY = ((x - centerX) / centerX) * 15;
             
             inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            
+            // Glare effect
+            const angle = Math.atan2(y - centerY, x - centerX) * (180 / Math.PI) - 90;
+            const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+            const opacity = Math.min(distance / (rect.width/2), 0.5);
+            glare.style.background = `linear-gradient(${angle}deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 80%)`;
+            glare.style.opacity = opacity;
         });
         
         card.addEventListener('mouseleave', () => {
             inner.style.transform = `rotateX(0deg) rotateY(0deg)`;
+            glare.style.opacity = '0';
         });
     });
 
-    // 7. Parallax Image inside Cards on Scroll
+    // 7. Scroll Events (Progress, Navbar, Back to Top)
+    const scrollProgress = document.getElementById('scrollProgress');
+    const backToTop = document.getElementById('backToTop');
+    
     window.addEventListener('scroll', () => {
         const scrolled = window.scrollY;
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrolled / totalHeight) * 100;
+        
+        // Update progress bar
+        if(scrollProgress) scrollProgress.style.width = progress + '%';
+        
+
+        
+        // Dynamic Hero Scroll Indicator Fade
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        if (scrollIndicator) {
+            const fadeProgress = Math.max(0, 1 - (scrolled / 300));
+            scrollIndicator.style.opacity = fadeProgress;
+            scrollIndicator.style.transform = `translateY(${scrolled * 0.2}px)`;
+        }
+
+        // Hero Window Parallax Effect
+        const heroBg = document.querySelector('.hero-bg-wrapper');
+        const heroContent = document.querySelector('.hero-content');
+        if (heroBg && scrolled < window.innerHeight) {
+            const scrollRatio = scrolled / window.innerHeight;
+            // Scale down slightly and push down
+            heroBg.style.transform = `scale(${1 - (scrollRatio * 0.15)}) translateY(${scrolled * 0.4}px)`;
+            heroBg.style.borderRadius = `${scrollRatio * 100}px`;
+            heroContent.style.transform = `translateY(${scrolled * 0.6}px)`;
+            heroContent.style.opacity = 1 - (scrollRatio * 1.5);
+        }
+        
+        // Show/Hide back to top
+        if(scrolled > 500) backToTop.classList.add('visible');
+        else backToTop.classList.remove('visible');
         
         // Navbar
         const navbar = document.querySelector('.navbar');
         if (scrolled > 50) navbar.classList.add('scrolled');
         else navbar.classList.remove('scrolled');
         
-        // Image Parallax
-        document.querySelectorAll('.parallax-img').forEach(img => {
-            const parent = img.parentElement.parentElement; // tilt-card
-            const rect = parent.getBoundingClientRect();
-            
-            // If card is in viewport
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                const yOffset = (rect.top / window.innerHeight) * 10; // Move up to 10%
-                img.style.transform = `translateY(${yOffset}%)`;
-            }
+        // Floating Ornament Parallax Depth
+        document.querySelectorAll('.floating-ornament').forEach((orn, i) => {
+            const speed = (i + 1) * 0.03;
+            orn.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.02}deg)`;
         });
+    });
+
+    // No replacement, deleting block.
+
+    // Back to top click
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // Hero Parallax on mouse move
@@ -230,6 +318,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 9c. Mobile Menu
+    const mobileMenu = document.getElementById('mobileMenu');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileClose = document.getElementById('mobileClose');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+
+    if(hamburgerBtn && mobileMenu) {
+        const toggleMobileMenu = (active) => {
+            if(active) mobileMenu.classList.add('active');
+            else mobileMenu.classList.remove('active');
+        };
+
+        hamburgerBtn.addEventListener('click', () => toggleMobileMenu(true));
+        if(mobileClose) mobileClose.addEventListener('click', () => toggleMobileMenu(false));
+        mobileLinks.forEach(link => link.addEventListener('click', () => toggleMobileMenu(false)));
+    }
+
+    // 9d. Lightbox for Gallery
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    if(lightbox) {
+        document.querySelectorAll('.gallery-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const imgSrc = card.querySelector('img').src;
+                const title = card.querySelector('h3').innerText;
+                if(lightboxImg) lightboxImg.src = imgSrc;
+                if(lightboxCaption) lightboxCaption.innerText = title;
+                lightbox.classList.add('active');
+            });
+        });
+
+        if(lightboxClose) lightboxClose.addEventListener('click', () => lightbox.classList.remove('active'));
+        lightbox.addEventListener('click', (e) => {
+            if(e.target === lightbox) lightbox.classList.remove('active');
+        });
+    }
+
     // 10. Modal Stylist
     const modal = document.getElementById('stylistModal');
     const openBtn = document.getElementById('openStylist');
@@ -244,15 +372,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     genBtn.addEventListener('click', () => {
-        genBtn.innerText = "Generating Magic...";
+        const eventType = document.getElementById('aiEvent').value || "special celebration";
+        const palette = document.getElementById('aiPalette').value || "royal hues";
+        
+        genBtn.innerText = "Designing Magic...";
+        genBtn.disabled = true;
+
         setTimeout(() => {
             modalBody.innerHTML = `
-                <div style="background: rgba(212,175,55,0.1); padding: 25px; border-radius: 20px; border: 1px solid var(--accent-gold); transform: scale(0.9); opacity: 0; animation: popIn 0.5s forwards cubic-bezier(0.16, 1, 0.3, 1);">
-                    <h4 style="color: var(--primary-maroon); font-family: var(--font-serif); margin-bottom: 15px; font-size: 1.4rem;">Our Vision For You:</h4>
-                    <p style="color: var(--text-dark); line-height: 1.8; font-size: 1.05rem;">Based on your unique inputs, we envision a spectacular open-air setup featuring lush marigold and jasmine drapes intertwining with geometric golden mandap pillars. We will enhance the ambiance with warm ambient uplighting and traditional brass diyas lining the walkway to create an unforgettable, majestic aura.</p>
+                <div class="ai-result-card" style="background: rgba(212,175,55,0.05); padding: 30px; border-radius: 25px; border: 1px solid var(--accent-gold); box-shadow: 0 20px 50px rgba(128,0,0,0.1);">
+                    <h4 class="gradient-text font-serif" style="margin-bottom: 15px; font-size: 1.5rem;">Bespoke Concept Design</h4>
+                    <p id="typewriterText" style="line-height: 1.8; font-size: 1.1rem; color: var(--text-dark); min-height: 100px;"></p>
+                    <div class="header-line" style="margin: 20px 0;"></div>
+                    <div style="display: flex; gap: 10px; margin-top: 20px;">
+                        <span class="badge" style="background: rgba(128,0,0,0.1); color: var(--primary-maroon); border: none;">Luxury Styling</span>
+                        <span class="badge" style="background: rgba(212,175,55,0.1); color: var(--accent-gold); border: none;">Hand-Crafted</span>
+                    </div>
                 </div>
-                <button class="btn-primary magnetic" data-strength="20" style="width: 100%; margin-top: 25px; padding: 1.2rem;" onclick="window.open('https://wa.me/919788742627', '_blank')">Discuss with Team on WhatsApp</button>
+                <button class="btn-primary magnetic glow-effect" data-strength="20" style="width: 100%; margin-top: 25px; padding: 1.2rem;" onclick="window.open('https://wa.me/919788742627', '_blank')">Discuss this Design on WhatsApp</button>
             `;
+            
+            const text = `For your ${eventType}, we envision a masterpiece using ${palette}. We will blend organic floral textures with majestic golden architecture, accented by intelligent mood lighting to create a cinematic atmosphere that whispers luxury in every detail.`;
+            let i = 0;
+            const typewriter = () => {
+                const textEl = document.getElementById('typewriterText');
+                if (textEl && i < text.length) {
+                    textEl.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typewriter, 30);
+                } else {
+                    genBtn.innerText = "Concept Ready";
+                    genBtn.disabled = false;
+                }
+            };
+            typewriter();
+
             // Add keyframes for popIn dynamically
             if (!document.getElementById('popInStyles')) {
                 const style = document.createElement('style');
@@ -275,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.style.transform = `translate(0px, 0px)`;
                 });
             }
-        }, 1800);
+        }, 1500);
     });
 
     // 11. Canvas Particle System
@@ -293,44 +447,55 @@ document.addEventListener('DOMContentLoaded', () => {
         resize();
 
         class Particle {
-            constructor() {
+            constructor(type = 'star') {
+                this.type = type;
                 this.x = Math.random() * w;
                 this.y = Math.random() * h;
-                this.size = Math.random() * 2.5 + 0.5;
-                this.speedY = Math.random() * 0.5 + 0.2;
-                this.speedX = (Math.random() - 0.5) * 0.4;
-                // Mix of gold and maroon hues
-                const isGold = Math.random() > 0.3;
-                this.color = isGold ? `rgba(212, 175, 55, ${Math.random() * 0.5 + 0.2})` : `rgba(128, 0, 0, ${Math.random() * 0.3 + 0.1})`;
+                this.size = this.type === 'star' ? (Math.random() * 2.5 + 0.5) : (Math.random() * 150 + 50);
+                this.speedY = this.type === 'star' ? (Math.random() * 0.4 + 0.1) : (Math.random() * 0.1 + 0.05);
+                this.speedX = (Math.random() - 0.5) * (this.type === 'star' ? 0.3 : 0.1);
+                const isGold = Math.random() > 0.4;
+                this.baseColor = isGold ? '212, 175, 55' : '128, 0, 0';
+                this.sparkle = Math.random() * 0.02 + 0.01;
+                this.alpha = Math.random();
             }
             update() {
                 this.y += this.speedY;
                 this.x += this.speedX;
-                // Gentle sway
-                this.x += Math.sin(this.y * 0.01) * 0.5;
+                this.x += Math.sin(this.y * 0.01) * (this.type === 'star' ? 0.5 : 0.2);
+                
+                this.alpha += this.sparkle;
+                if(this.alpha > 0.8 || this.alpha < 0.1) this.sparkle *= -1;
 
-                if (this.y > h) {
-                    this.y = -10;
+                if (this.y > h + 100) {
+                    this.y = -100;
                     this.x = Math.random() * w;
-                }
-                if (this.x > w || this.x < 0) {
-                    this.speedX *= -1;
                 }
             }
             draw() {
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
+                if (this.type === 'star') {
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${this.baseColor}, ${this.alpha})`;
+                    ctx.fill();
+                } else {
+                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                    gradient.addColorStop(0, `rgba(${this.baseColor}, ${this.alpha * 0.15})`);
+                    gradient.addColorStop(1, `rgba(${this.baseColor}, 0)`);
+                    ctx.fillStyle = gradient;
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
             }
         }
 
         const initParticles = () => {
             particles = [];
-            const particleCount = window.innerWidth < 768 ? 40 : 100;
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
+            const starCount = window.innerWidth < 768 ? 150 : 500;
+            const glowCount = window.innerWidth < 768 ? 5 : 12;
+            
+            for (let i = 0; i < starCount; i++) particles.push(new Particle('star'));
+            for (let i = 0; i < glowCount; i++) particles.push(new Particle('glow'));
         };
         initParticles();
 
