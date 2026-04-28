@@ -1005,3 +1005,927 @@
 </body>
 
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>வணக்கம் வந்தனம் | Premium Event Artistry</title>
+    <meta name="description" content="South Indian luxury event decoration. Traditional granduer meeting modern elegance.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500&family=Noto+Serif+Tamil:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --ivory: #FAF6EF;
+            --cream: #F2EAD8;
+            --gold: #C9A85C;
+            --gold-light: #EDD898;
+            --gold-dark: #8B6914;
+            --charcoal: #1C1208;
+            --warm-brown: #3D2B1F;
+            --transition: 0.45s cubic-bezier(.25,.46,.45,.94);
+        }
+
+        /* Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
+        @media (pointer: coarse) { * { cursor: auto !important; } #cur, #cur-r { display: none !important; } }
+
+        body {
+            background-color: var(--ivory);
+            color: var(--charcoal);
+            font-family: 'Jost', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, .font-serif { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+        .tamil { font-family: 'Noto Serif Tamil', serif; }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        section { padding: 120px 0; position: relative; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+
+        /* Branded Loader */
+        #loader {
+            position: fixed; inset: 0; background: var(--charcoal); z-index: 99999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: transform 0.7s ease-in-out;
+        }
+        .loader-svg { width: 80px; height: 80px; margin-bottom: 2rem; }
+        .loader-svg path {
+            stroke: var(--gold); stroke-width: 1.5; fill: none;
+            stroke-dasharray: 400; stroke-dashoffset: 400;
+        }
+        .loader-tamil { color: var(--gold); font-size: 1.2rem; letter-spacing: 0.1em; display: flex; gap: 4px; }
+        .loader-tamil span { opacity: 0; }
+
+        /* Custom Cursor */
+        #cur {
+            position: fixed; width: 10px; height: 10px; background: var(--gold);
+            border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+            transition: transform 0.25s ease, background 0.25s ease;
+        }
+        #cur-r {
+            position: fixed; width: 40px; height: 40px; border: 1.5px solid rgba(201,168,92,0.7);
+            border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%);
+            display: flex; align-items: center; justify-content: center; font-size: 9px;
+            font-weight: 700; color: transparent; text-transform: uppercase;
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+        #cur.hovered { transform: translate(-50%, -50%) scale(4); mix-blend-mode: difference; background: #fff; }
+        #cur-r.hovered { transform: translate(-50%, -50%) scale(1.8); color: var(--gold); background: rgba(201,168,92,0.1); }
+
+        /* Navbar */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 1.5rem 3rem;
+            z-index: 1000; transition: var(--transition); display: flex; align-items: center; justify-content: space-between;
+        }
+        .navbar.scrolled {
+            background: rgba(250,246,239,0.88); backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%); padding: 0.8rem 3rem;
+            border-bottom: 1px solid rgba(201,168,92,0.3);
+        }
+        .nav-logo { font-size: 1.8rem; font-weight: 700; color: #fff; font-family: 'Cormorant Garamond', serif; }
+        .navbar.scrolled .nav-logo { color: var(--charcoal); }
+        .nav-links { display: flex; gap: 3rem; }
+        .nav-links a { font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; color: #fff; }
+        .navbar.scrolled .nav-links a { color: var(--warm-brown); }
+        .nav-cta {
+            background: var(--gold); color: var(--gold-dark); padding: 0.8rem 1.8rem;
+            border-radius: 4px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase;
+            letter-spacing: 1px; position: relative; overflow: hidden;
+        }
+
+        /* Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed; top: 0; left: 0; height: 3px; z-index: 10000; width: 0;
+            background: linear-gradient(to right, #EDD898, #C9A85C, #8B6914);
+        }
+
+        /* Dancing Letters */
+        .char { display: inline-block; opacity: 0; transform: translateY(60px) rotate(8deg); }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; overflow: hidden; color: #fff; padding: 0;
+        }
+        .hero-bg-wrapper { position: absolute; inset: 0; z-index: -1; }
+        .hero-bg {
+            width: 100%; height: 100%; object-fit: cover;
+            animation: kenBurns 18s ease-in-out infinite alternate;
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(10,6,2,0.55) 0%, rgba(10,6,2,0.25) 40%, rgba(10,6,2,0.65) 100%);
+        }
+        @keyframes kenBurns {
+            0% { transform: scale(1.1) translate(-2%, -1%); }
+            100% { transform: scale(1.0) translate(0, 0); }
+        }
+
+        .hero-content { z-index: 1; max-width: 1000px; padding: 0 2rem; }
+        .hero-tamil { font-size: 1.2rem; color: var(--gold); letter-spacing: 0.3em; margin-bottom: 1rem; opacity: 0; }
+        .hero-badge {
+            display: inline-block; padding: 0.4rem 1rem; border: 1px solid var(--gold);
+            border-radius: 20px; color: var(--cream); font-size: 11px; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 1.5rem; opacity: 0;
+        }
+        .hero h1 { font-size: clamp(52px, 8vw, 96px); line-height: 1; margin-bottom: 2rem; }
+        .hero-subtitle { font-size: 1.8rem; height: 1.8rem; overflow: hidden; position: relative; margin-bottom: 3rem; }
+        .morph-text {
+            position: absolute; width: 100%; left: 0; top: 0;
+            clip-path: inset(0 100% 0 0); transition: clip-path 0.8s ease-in-out;
+        }
+        .morph-text.active { clip-path: inset(0 0% 0 0); }
+
+        .hero-btns { display: flex; justify-content: center; gap: 2rem; opacity: 0; }
+        .btn-gold { background: var(--gold); color: var(--gold-dark); }
+        .btn-outline { border: 1.5px solid var(--gold); color: #fff; background: transparent; }
+
+        /* Particles & Petals */
+        #hero-particles { position: absolute; inset: 0; pointer-events: none; }
+        .particle {
+            position: absolute; background: rgba(201,168,92, 0.7); border-radius: 50%;
+            animation: fall linear infinite;
+        }
+        .petal {
+            position: absolute; width: 15px; height: 10px; border-radius: 50% 0 50% 0;
+            transform: rotate(45deg); animation: fall linear infinite, petalRotate linear infinite;
+        }
+        @keyframes fall {
+            from { transform: translateY(-20px) translateX(0); }
+            to { transform: translateY(110vh) translateX(var(--drift)); }
+        }
+        @keyframes petalRotate {
+            from { transform: rotate(45deg); }
+            to { transform: rotate(405deg); }
+        }
+
+        /* Marquee */
+        .marquee-section { padding: 40px 0; background: #1C1208; overflow: hidden; }
+        .marquee-row { display: flex; white-space: nowrap; margin-bottom: 20px; }
+        .marquee-track {
+            display: flex; animation: scrollLeft linear infinite; will-change: transform;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+        }
+        .marquee-row:nth-child(2) .marquee-track { animation: scrollRight linear infinite; }
+        .marquee-track:hover { animation-play-state: paused; }
+        .marquee-item {
+            font-size: 2rem; font-weight: 700; font-family: 'Cormorant Garamond', serif;
+            color: var(--gold); margin-right: 4rem; text-transform: uppercase;
+        }
+        @keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes scrollRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+        /* About Section */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+        @media (max-width: 992px) { .about-grid { grid-template-columns: 1fr; } }
+        .about-img-wrapper { position: relative; padding: 2rem; }
+        .about-img { border-radius: 4px; box-shadow: 0 30px 60px rgba(28,18,8,0.15); width: 100%; transition: transform 0.1s linear; }
+        .corner-frame {
+            position: absolute; width: 60px; height: 60px; border: 2px solid var(--gold);
+            pointer-events: none; z-index: 1;
+        }
+        .corner-tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+        .corner-tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+        .corner-bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+        .corner-br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+        .about-content h2 { font-size: 3.5rem; color: var(--charcoal); margin-bottom: 2rem; }
+        .about-content p { color: var(--warm-brown); font-size: 1.1rem; margin-bottom: 2rem; }
+
+        /* Stats Strip */
+        .stats-strip { background: linear-gradient(135deg, #C9A85C, #8B6914); padding: 60px 0; color: #fff; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; }
+        .stat-item h3 { font-size: 4rem; font-weight: 700; line-height: 1; }
+        .stat-item p { text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; opacity: 0.9; }
+
+        /* Services */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .service-card {
+            background: var(--cream); padding: 4rem 3rem; border-radius: 12px;
+            transition: var(--transition); border: 1px solid rgba(201,168,92,0.1); text-align: center;
+        }
+        .service-card:nth-child(even) { background: var(--ivory); }
+        .service-card:hover { transform: translateY(-15px); border-color: var(--gold); }
+        .service-icon { font-size: 3rem; margin-bottom: 2rem; color: var(--gold); }
+
+        /* Gallery */
+        .gallery { background: var(--cream); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; }
+        .gallery-card {
+            position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/5;
+            perspective: 1000px; transform-style: preserve-3d;
+        }
+        .gallery-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .gallery-overlay {
+            position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            opacity: 0; display: flex; align-items: flex-end; padding: 2.5rem; transition: opacity 0.4s ease;
+        }
+        .gallery-card:hover .gallery-overlay { opacity: 1; }
+        .gallery-card:hover img { transform: scale(1.08); }
+        .gallery-info h4 { color: var(--gold); font-size: 1.8rem; transform: translateY(20px); opacity: 0; transition: 0.4s ease; }
+        .gallery-card:hover .gallery-info h4 { transform: translateY(0); opacity: 1; }
+        
+        .specular {
+            position: absolute; inset: 0; pointer-events: none; z-index: 2; opacity: 0;
+            background: radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,0.3) 0%, transparent 60%);
+        }
+        .gallery-card:hover .specular { opacity: 1; }
+
+        /* Process */
+        .process { background: #1C1208; color: var(--ivory); }
+        .process h2 { color: var(--gold); }
+        .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 4rem; margin-top: 5rem; }
+        .process-step { position: relative; }
+        .step-num { font-size: 5rem; font-weight: 800; color: rgba(201,168,92,0.15); line-height: 1; margin-bottom: -1.5rem; }
+        .step-content h3 { color: var(--gold); font-size: 1.8rem; margin-bottom: 1rem; }
+        .connector { position: absolute; top: 30px; right: -50px; width: 100px; z-index: -1; }
+        @media (max-width: 768px) { .connector { display: none; } }
+
+        /* Pricing */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 3rem; align-items: flex-start; }
+        .price-card {
+            background: var(--cream); padding: 4rem 3rem; border-radius: 16px;
+            border: 1px solid rgba(201,168,92,0.1); position: relative; transition: var(--transition);
+        }
+        .grand-price {
+            background: linear-gradient(145deg, #FAF6EF, #F2EAD8); border: 1px solid var(--gold);
+            transform: translateY(-16px); animation: breathe 3s ease-in-out infinite alternate;
+        }
+        @keyframes breathe {
+            from { box-shadow: 0 20px 60px rgba(201,168,92,0.2); }
+            to { box-shadow: 0 32px 80px rgba(201,168,92,0.45); }
+        }
+        .price-card .popular {
+            position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);
+            background: var(--gold); color: #000; padding: 0.5rem 1.5rem; border-radius: 20px;
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+        }
+        .price-card h3 { font-size: 2.2rem; color: var(--gold-dark); margin-bottom: 1rem; }
+        .price-card ul { margin: 2rem 0; }
+        .price-card li { margin-bottom: 1rem; position: relative; padding-left: 1.5rem; color: var(--warm-brown); }
+        .price-card li::before { content: '⚜'; position: absolute; left: 0; color: var(--gold); }
+
+        /* FAQ */
+        .faq-accordion { max-width: 900px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid rgba(201,168,92,0.2); }
+        .faq-head { padding: 2rem 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .faq-head h3 { font-size: 1.5rem; }
+        .faq-icon { font-size: 1.8rem; color: var(--gold); transition: transform 0.4s ease; }
+        .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
+        .faq-body p { padding-bottom: 2rem; color: var(--warm-brown); }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        .faq-item.active .faq-body { max-height: 300px; }
+
+        /* Footer */
+        .footer { background: #1C1208; color: var(--ivory); padding: 100px 0 50px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5rem; }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+        .footer h2 { font-size: 3rem; color: var(--gold); margin-bottom: 1.5rem; }
+        .footer h4 { color: var(--gold); margin-bottom: 1.5rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; }
+        .footer a { display: block; margin-bottom: 1rem; color: rgba(250,246,239,0.7); font-size: 0.95rem; }
+        .footer a:hover { color: var(--gold); }
+        .footer-bottom { text-align: center; padding-top: 3rem; color: rgba(250,246,239,0.4); font-size: 0.8rem; }
+
+        /* Micro Interactions */
+        .shimmer-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.25) 50%, transparent 75%);
+            transition: 0.6s ease; transform: skewX(-20deg);
+        }
+        .shimmer-btn:hover::before { left: 150%; }
+        .ripple { position: absolute; background: rgba(255,255,255,0.5); transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; animation: ripple 0.5s ease-out; }
+        @keyframes ripple { from { width: 0; height: 0; opacity: 0.5; } to { width: 400px; height: 400px; opacity: 0; } }
+
+        /* FAB */
+        .wa-fab {
+            position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px;
+            background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 30px rgba(37,211,102,0.3); z-index: 1000; animation: waPulse 2.5s infinite;
+        }
+        @keyframes waPulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.6); } 70% { box-shadow: 0 0 0 20px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; }
+            .char, .hero-tamil, .hero-badge, .hero-btns { opacity: 1 !important; transform: none !important; }
+            .hero-bg { animation: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Branded Loader -->
+    <div id="loader">
+        <svg class="loader-svg" viewBox="0 0 100 100">
+            <path d="M50 10 Q60 30 50 50 Q40 30 50 10 M50 50 Q70 60 90 50 Q70 70 50 50 M50 50 Q30 60 10 50 Q30 70 50 50 M50 50 Q60 80 50 95 Q40 80 50 50" />
+        </svg>
+        <div class="loader-tamil tamil">வணக்கம் வந்தனம்</div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div id="cur"></div>
+    <div id="cur-r"></div>
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="nav-logo">VANAKAM VANDHANAM</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#services">Services</a>
+            <a href="#why-us">Why Us</a>
+        </div>
+        <a href="https://wa.me/919788742627" class="nav-cta shimmer-btn">Consult Expert</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg-wrapper">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80" alt="Hero" class="hero-bg">
+            <div class="hero-overlay"></div>
+        </div>
+        <div id="hero-particles"></div>
+        <div class="hero-content">
+            <div class="hero-tamil tamil">வணக்கம் வந்தனம்</div>
+            <div class="hero-badge">South Indian Grandeur</div>
+            <h1 class="dance-text">CELEBRATE with TIMELESS ELEGANCE</h1>
+            <div class="hero-subtitle">
+                <div class="morph-text active">South Indian Grandeur</div>
+                <div class="morph-text">Royal Mandap Artistry</div>
+                <div class="morph-text">Balloon Wonderlands</div>
+                <div class="morph-text">Festival Magic</div>
+            </div>
+            <div class="hero-btns">
+                <a href="#gallery" class="nav-cta btn-gold shimmer-btn">Explore Designs</a>
+                <a href="https://wa.me/919788742627" class="nav-cta btn-outline shimmer-btn">Consult Expert</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-section">
+        <div class="marquee-row">
+            <div class="marquee-track" style="animation-duration: 28s">
+                <div class="marquee-item">⚜ VANAKAM VANDHANAM ⚜ EVENT ARTISTRY ⚜ LUXURY DESIGN ⚜ BEYOND IMAGINATION ⚜</div>
+                <div class="marquee-item">⚜ VANAKAM VANDHANAM ⚜ EVENT ARTISTRY ⚜ LUXURY DESIGN ⚜ BEYOND IMAGINATION ⚜</div>
+            </div>
+        </div>
+        <div class="marquee-row">
+            <div class="marquee-track" style="animation-duration: 36s">
+                <div class="marquee-item">✦ WEDDINGS ✦ BIRTHDAYS ✦ FESTIVALS ✦ BALLOON ARTISTRY ✦ MANDAP DESIGNS ✦</div>
+                <div class="marquee-item">✦ WEDDINGS ✦ BIRTHDAYS ✦ FESTIVALS ✦ BALLOON ARTISTRY ✦ MANDAP DESIGNS ✦</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-img-wrapper">
+                    <div class="corner-frame corner-tl"></div>
+                    <div class="corner-frame corner-tr"></div>
+                    <div class="corner-frame corner-bl"></div>
+                    <div class="corner-frame corner-br"></div>
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=85" alt="About" class="about-img parallax-target">
+                </div>
+                <div class="about-content">
+                    <h2 class="dance-text">Crafting Stories <span style="color: var(--gold)">of Grandeur</span></h2>
+                    <p>At Vanakam Vandhanam, we believe every celebration is a story waiting to be told. With years of experience in luxury event styling, we transform ordinary spaces into breathtaking realms of beauty.</p>
+                    <p>Our dedicated team specializes in everything from majestic traditional South Indian weddings to whimsical, modern birthday wonderlands. We don't just decorate; we create atmospheres that resonate with your soul.</p>
+                    <a href="#gallery" class="nav-cta btn-gold shimmer-btn">View Our Work</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Strip -->
+    <div class="stats-strip">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 class="stat-counter" data-target="500" data-suffix="+">0</h3>
+                    <p>Events Perfected</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-counter" data-target="8" data-suffix="+">0</h3>
+                    <p>Years Experience</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-counter" data-target="99" data-suffix="%">0</h3>
+                    <p>Client Joy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title reveal-up" style="text-align: center; margin-bottom: 4rem;">
+                <h2 class="dance-text">Our Expertise</h2>
+                <p>Meticulous planning combined with flawless execution.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal-card">
+                    <div class="service-icon">🏛</div>
+                    <h3>Wedding Decorations</h3>
+                    <p>Breathtaking mandaps and stage setups that blend tradition with grandeur.</p>
+                </div>
+                <div class="service-card reveal-card">
+                    <div class="service-icon">🎈</div>
+                    <h3>Birthday Decorations</h3>
+                    <p>Magical themes and balloon wonderlands for every milestone.</p>
+                </div>
+                <div class="service-card reveal-card">
+                    <div class="service-icon">✨</div>
+                    <h3>Balloon Artistry</h3>
+                    <p>Creative structures and organic garlands for dynamic visual impact.</p>
+                </div>
+                <div class="service-card reveal-card">
+                    <div class="service-icon">🌸</div>
+                    <h3>Festival & Traditional</h3>
+                    <p>Vibrant Diwali, Pongal, and home transformation setups.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-title reveal-up" style="text-align: center; margin-bottom: 4rem;">
+                <h2 class="dance-text">Breathtaking Setups</h2>
+                <p>A visual journey through our most cherished transformations.</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-card reveal-item" data-filter="wedding">
+                    <div class="specular"></div>
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1200&q=85" alt="Wedding Mandap" loading="lazy" decoding="async">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info"><h4>Royal Floral Mandap</h4></div>
+                    </div>
+                </div>
+                <div class="gallery-card reveal-item" data-filter="wedding">
+                    <div class="specular"></div>
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=85" alt="Wedding Aisle" loading="lazy" decoding="async">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info"><h4>Floral Aisle Walkway</h4></div>
+                    </div>
+                </div>
+                <div class="gallery-card reveal-item" data-filter="birthday">
+                    <div class="specular"></div>
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=85" alt="Birthday" loading="lazy" decoding="async">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info"><h4>Magical Themes</h4></div>
+                    </div>
+                </div>
+                <div class="gallery-card reveal-item" data-filter="festival">
+                    <div class="specular"></div>
+                    <img src="https://images.unsplash.com/photo-1470753937643-efeb931202a9?w=1200&q=85" alt="Festival" loading="lazy" decoding="async">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info"><h4>Festive Grandeur</h4></div>
+                    </div>
+                </div>
+                <div class="gallery-card reveal-item" data-filter="wedding">
+                    <div class="specular"></div>
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1200&q=85" alt="Reception Stage" loading="lazy" decoding="async">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info"><h4>Reception Stage</h4></div>
+                    </div>
+                </div>
+                <div class="gallery-card reveal-item" data-filter="birthday">
+                    <div class="specular"></div>
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1200&q=85" alt="Balloon Arch" loading="lazy" decoding="async">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info"><h4>Balloon Wonderlands</h4></div>
+                    </div>
+                </div>
+                <div class="gallery-card reveal-item" data-filter="wedding">
+                    <div class="specular"></div>
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&q=85" alt="Floral Decor" loading="lazy" decoding="async">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info"><h4>Elegant Florals</h4></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <div class="section-title reveal-up">
+                <h2 class="dance-text">Our Seamless Process</h2>
+                <p>Four steps to the celebration of your dreams.</p>
+            </div>
+            <div class="process-grid">
+                <div class="process-step reveal-step">
+                    <div class="step-num">01</div>
+                    <div class="step-content">
+                        <h3>Consultation</h3>
+                        <p>We listen to your vision, understand your cultural preferences, budget, and style.</p>
+                    </div>
+                    <svg class="connector" viewBox="0 0 100 20"><path d="M0 10 Q50 0 100 10" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="150" stroke-dashoffset="150" /></svg>
+                </div>
+                <div class="process-step reveal-step">
+                    <div class="step-num">02</div>
+                    <div class="step-content">
+                        <h3>Design & Concept</h3>
+                        <p>Our stylists create mood boards and 3D renders of your bespoke decoration plan.</p>
+                    </div>
+                    <svg class="connector" viewBox="0 0 100 20"><path d="M0 10 Q50 20 100 10" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="150" stroke-dashoffset="150" /></svg>
+                </div>
+                <div class="process-step reveal-step">
+                    <div class="step-num">03</div>
+                    <div class="step-content">
+                        <h3>Crafting & Setup</h3>
+                        <p>Our team arrives early and transforms your venue into a breathtaking masterpiece.</p>
+                    </div>
+                    <svg class="connector" viewBox="0 0 100 20"><path d="M0 10 Q50 0 100 10" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="150" stroke-dashoffset="150" /></svg>
+                </div>
+                <div class="process-step reveal-step">
+                    <div class="step-num">04</div>
+                    <div class="step-content">
+                        <h3>Grand Reveal</h3>
+                        <p>You walk in to perfection. We handle teardown so you focus on celebrating.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <div class="container">
+            <div class="section-title reveal-up" style="text-align: center; margin-bottom: 5rem;">
+                <h2 class="dance-text">Investment</h2>
+                <p>Transparent pricing for premium transformations.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card reveal-price">
+                    <h3>Intimate Bliss</h3>
+                    <ul>
+                        <li>Standard Backdrop Design</li>
+                        <li>Premium Artificial Florals</li>
+                        <li>LED Spot Lighting</li>
+                        <li>Cake Table Styling</li>
+                    </ul>
+                    <a href="https://wa.me/919788742627" class="nav-cta btn-gold shimmer-btn" style="width: 100%; text-align: center; display: block;">Select Package</a>
+                </div>
+                <div class="price-card grand-price reveal-price">
+                    <div class="popular">Most Popular</div>
+                    <h3>Cultural Heritage</h3>
+                    <ul>
+                        <li>Full Mandap / Stage Decor</li>
+                        <li>Mix of Fresh & Silk Flowers</li>
+                        <li>Custom Entrance Arch</li>
+                        <li>Venue Mood Lighting</li>
+                    </ul>
+                    <a href="https://wa.me/919788742627" class="nav-cta btn-gold shimmer-btn" style="width: 100%; text-align: center; display: block;">Select Package</a>
+                </div>
+                <div class="price-card reveal-price">
+                    <h3>Royal Signature</h3>
+                    <ul>
+                        <li>Ultra-Premium Theme Design</li>
+                        <li>100% Exotic Fresh Florals</li>
+                        <li>3D Projection Mapping</li>
+                        <li>VIP Guest Lounge Styling</li>
+                    </ul>
+                    <a href="https://wa.me/919788742627" class="nav-cta btn-gold shimmer-btn" style="width: 100%; text-align: center; display: block;">Select Package</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-title reveal-up" style="text-align: center; margin-bottom: 4rem;">
+                <h2 class="dance-text">Frequently Asked</h2>
+            </div>
+            <div class="faq-accordion">
+                <div class="faq-item reveal-faq">
+                    <div class="faq-head"><h3>How far in advance should I book?</h3><span class="faq-icon">+</span></div>
+                    <div class="faq-body"><p>We recommend booking at least 2–4 weeks in advance for birthdays and 1–3 months for weddings.</p></div>
+                </div>
+                <div class="faq-item reveal-faq">
+                    <div class="faq-head"><h3>Do you provide floral and balloon services?</h3><span class="faq-icon">+</span></div>
+                    <div class="faq-body"><p>Yes! We offer fresh floral arrangements, artificial flower setups, and organic balloon garlands.</p></div>
+                </div>
+                <div class="faq-item reveal-faq">
+                    <div class="faq-head"><h3>What areas do you serve?</h3><span class="faq-icon">+</span></div>
+                    <div class="faq-body"><p>We primarily serve Tamil Nadu — Chennai, Coimbatore, Madurai, Trichy, and surrounding areas.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner" style="background: url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1600&q=80') center/cover; padding: 150px 0; text-align: center; color: #fff;">
+        <div class="hero-overlay" style="background: rgba(28,18,8,0.7)"></div>
+        <div class="container" style="position: relative;">
+            <h2 class="dance-text" style="font-size: 4rem; margin-bottom: 2rem;">Plan Your Dream Event</h2>
+            <a href="https://wa.me/919788742627" class="nav-cta btn-gold shimmer-btn" style="font-size: 1.2rem; padding: 1.2rem 3rem;">Request Custom Quote</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>வணக்கம் வந்தனம்</h2>
+                    <p>Crafting memories that last a lifetime with the rich heritage and modern luxury of event design.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <a href="#about">About Us</a>
+                    <a href="#gallery">Gallery</a>
+                    <a href="#services">Expertise</a>
+                    <a href="#pricing">Pricing</a>
+                </div>
+                <div>
+                    <h4>Connect</h4>
+                    <a href="#">Instagram</a>
+                    <a href="#">Facebook</a>
+                    <a href="https://wa.me/919788742627">WhatsApp</a>
+                    <p style="margin-top: 1rem; color: var(--gold);">+91 97887 42627</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2026 Vanakam Vandhanam Events. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp FAB -->
+    <a href="https://wa.me/919788742627" class="wa-fab" target="_blank">
+        <svg width="35" height="35" viewBox="0 0 24 24" fill="#fff"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.483 8.413-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.308 1.654zm6.215-3.662l.35.208c1.378.818 2.915 1.249 4.49 1.25h.001c5.441 0 9.866-4.425 9.869-9.866.001-2.636-1.026-5.115-2.893-6.983-1.866-1.867-4.345-2.894-6.98-2.894-5.442 0-9.867 4.426-9.869 9.867-.001 1.745.459 3.451 1.332 4.957l.22.378-1.11 4.057 4.16-1.09zm11.196-7.391c-.267-.134-1.579-.779-1.824-.868-.244-.089-.422-.134-.599.134-.177.268-.687.868-.843 1.046-.156.179-.311.201-.578.067-.267-.134-1.127-.416-2.148-1.326-.793-.708-1.328-1.582-1.484-1.849-.156-.267-.016-.411.117-.544.121-.119.267-.311.4-.467.133-.156.177-.267.267-.445.089-.178.044-.334-.022-.468-.067-.134-.599-1.445-.822-1.979-.216-.523-.434-.452-.599-.461-.155-.008-.333-.01-.511-.01s-.467.067-.71.334c-.244.267-.933.911-.933 2.222 0 1.311.955 2.578 1.088 2.756.134.178 1.88 2.871 4.555 4.025.637.274 1.133.438 1.52.56.638.203 1.22.175 1.678.107.511-.077 1.579-.645 1.801-1.267.222-.622.222-1.156.155-1.267-.066-.11-.244-.177-.511-.311z"/></svg>
+    </a>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Directive: Custom Cursor
+        const cur = document.getElementById('cur');
+        const curR = document.getElementById('cur-r');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+
+        if (!('ontouchstart' in window)) {
+            window.addEventListener('mousemove', e => {
+                mx = e.clientX; my = e.clientY;
+                cur.style.left = mx + 'px';
+                cur.style.top = my + 'px';
+            });
+
+            function lerp() {
+                rx += (mx - rx) * 0.12;
+                ry += (my - ry) * 0.12;
+                curR.style.left = rx + 'px';
+                curR.style.top = ry + 'px';
+                requestAnimationFrame(lerp);
+            }
+            lerp();
+
+            document.querySelectorAll('a, button, .gallery-card, .faq-head').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cur.classList.add('hovered');
+                    curR.classList.add('hovered');
+                    if (el.classList.contains('gallery-card')) curR.textContent = 'VIEW';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cur.classList.remove('hovered');
+                    curR.classList.remove('hovered');
+                    curR.textContent = '';
+                });
+            });
+        }
+
+        // Directive: Dancing Letters
+        document.querySelectorAll('.dance-text').forEach(el => {
+            const wrapTextNodes = (node) => {
+                if (node.nodeType === 3) {
+                    const text = node.textContent;
+                    if (!text.trim()) return;
+                    const fragment = document.createDocumentFragment();
+                    text.split("").forEach(c => {
+                        if (c === " ") {
+                            fragment.appendChild(document.createTextNode(" "));
+                        } else {
+                            const span = document.createElement("span");
+                            span.className = "char";
+                            span.textContent = c;
+                            fragment.appendChild(span);
+                        }
+                    });
+                    node.parentNode.replaceChild(fragment, node);
+                } else if (node.nodeType === 1) {
+                    Array.from(node.childNodes).forEach(wrapTextNodes);
+                }
+            };
+            wrapTextNodes(el);
+            
+            ScrollTrigger.create({
+                trigger: el,
+                start: "top 85%",
+                onEnter: () => {
+                    gsap.to(el.querySelectorAll('.char'), {
+                        opacity: 1, y: 0, rotation: 0,
+                        stagger: 0.035,
+                        duration: 0.8,
+                        ease: "back.out(1.7)"
+                    });
+                    if (el.tagName === 'H1') {
+                        gsap.fromTo(el, {scale: 0.8}, {scale: 1, duration: 1.2, ease: "elastic.out(1, 0.5)"});
+                    }
+                }
+            });
+        });
+
+        // Directive: Morphing Subtitle
+        const morphTexts = document.querySelectorAll('.morph-text');
+        let morphIdx = 0;
+        setInterval(() => {
+            morphTexts[morphIdx].classList.remove('active');
+            morphIdx = (morphIdx + 1) % morphTexts.length;
+            morphTexts[morphIdx].classList.add('active');
+        }, 3500);
+
+        // Directive: Branded Loader
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline();
+            tl.to('.loader-svg path', { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut" })
+              .to('.loader-tamil span', { opacity: 1, stagger: 0.06, duration: 0.4 }, "-=0.6")
+              .to('#loader', { yPercent: -100, duration: 0.8, ease: "power3.inOut", delay: 0.5 })
+              .from('.hero-tamil', { opacity: 0, y: 20, duration: 0.8 }, "-=0.2")
+              .from('.hero-badge', { opacity: 0, y: 20, duration: 0.8 }, "-=0.6")
+              .from('.hero-btns', { opacity: 0, y: 20, duration: 0.8 }, "-=0.6");
+            
+            // Wrap loader tamil chars
+            const tamil = document.querySelector('.loader-tamil');
+            tamil.innerHTML = tamil.innerText.split("").map(c => `<span>${c}</span>`).join("");
+        });
+
+        // Directive: GSAP Scroll Reveals
+        gsap.utils.toArray('.reveal-up').forEach(el => {
+            gsap.from(el, { y: 50, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 80%' }});
+        });
+        gsap.from('.reveal-card', { y: 80, opacity: 0, rotation: -3, stagger: 0.12, ease: 'back.out(1.4)', scrollTrigger: { trigger: '.services-grid', start: 'top 75%' }});
+        gsap.from('.reveal-item', { scale: 0.88, opacity: 0, stagger: 0.08, ease: 'power2.out', scrollTrigger: { trigger: '.gallery-grid', start: 'top 75%' }});
+        gsap.from('.reveal-step', { x: -60, opacity: 0, stagger: 0.2, ease: 'power2.out', scrollTrigger: { trigger: '.process-grid', start: 'top 75%' }});
+        gsap.from('.reveal-price', { y: 60, opacity: 0, scale: 0.95, stagger: 0.15, scrollTrigger: { trigger: '.pricing-grid', start: 'top 75%' }});
+        gsap.from('.reveal-faq', { x: 30, opacity: 0, stagger: 0.07, scrollTrigger: { trigger: '.faq-accordion', start: 'top 80%' }});
+
+        // Directive: Connector Lines Drawing
+        document.querySelectorAll('.reveal-step').forEach(step => {
+            ScrollTrigger.create({
+                trigger: step,
+                start: "top 75%",
+                onEnter: () => {
+                    const line = step.querySelector('.connector path');
+                    if (line) gsap.to(line, { strokeDashoffset: 0, duration: 0.8, ease: "power2.out" });
+                }
+            });
+        });
+
+        // Directive: Stats Counter FIX
+        const animateCounter = (el, target, duration) => {
+            let start = 0;
+            const startTime = performance.now();
+            const suffix = el.dataset.suffix || "";
+            const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+
+            function update(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const value = Math.floor(easeOutCubic(progress) * target);
+                el.innerText = value + suffix;
+                if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        };
+
+        const counterObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.dataset.target);
+                    animateCounter(entry.target, target, 2500);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.stat-counter').forEach(el => counterObserver.observe(el));
+
+        // Directive: 3D Tilt
+        document.querySelectorAll('.gallery-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const px = (x / rect.width - 0.5) * 20;
+                const py = (y / rect.height - 0.5) * -20;
+                card.style.transform = `perspective(1000px) rotateY(${px}deg) rotateX(${py}deg)`;
+                card.querySelector('.specular').style.setProperty('--mx', `${x}px`);
+                card.querySelector('.specular').style.setProperty('--my', `${y}px`);
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
+                card.style.transition = 'transform 0.7s cubic-bezier(.34,1.56,.64,1)';
+            });
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'none';
+            });
+        });
+
+        // Directive: Navbar Glassmorphism
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.navbar');
+            const progress = document.getElementById('scroll-progress');
+            if (window.scrollY > 80) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+
+            const total = document.documentElement.scrollHeight - window.innerHeight;
+            progress.style.width = (window.scrollY / total) * 100 + '%';
+        }, { passive: true });
+
+        // Directive: Hero Particles
+        function createHeroExtras() {
+            const container = document.getElementById('hero-particles');
+            for (let i = 0; i < 60; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                const size = Math.random() * 3 + 2;
+                p.style.width = size + 'px'; p.style.height = size + 'px';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = Math.random() * 7 + 5 + 's';
+                p.style.animationDelay = Math.random() * 8 + 's';
+                p.style.setProperty('--drift', (Math.random() * 100 - 50) + 'px');
+                container.appendChild(p);
+            }
+            const colors = ['#F4A7B9', '#FFB347', '#FFD700'];
+            for (let i = 0; i < 20; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.animationDuration = Math.random() * 7 + 8 + 's';
+                petal.style.animationDelay = Math.random() * 5 + 's';
+                petal.style.setProperty('--drift', (Math.random() * 120 - 60) + 'px');
+                container.appendChild(petal);
+            }
+        }
+        createHeroExtras();
+
+        // Directive: Ripple & Shimmer
+        document.addEventListener('click', e => {
+            const btn = e.target.closest('.shimmer-btn');
+            if (btn) {
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                const rect = btn.getBoundingClientRect();
+                ripple.style.left = (e.clientX - rect.left) + 'px';
+                ripple.style.top = (e.clientY - rect.top) + 'px';
+                btn.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 500);
+            }
+        });
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-head').forEach(head => {
+            head.addEventListener('click', () => {
+                const item = head.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Parallax About
+        window.addEventListener('scroll', () => {
+            const img = document.querySelector('.parallax-target');
+            const rect = img.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                img.style.transform = `translateY(${rect.top * 0.1}px)`;
+            }
+        }, { passive: true });
+
+    </script>
+</body>
+</html>
