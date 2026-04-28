@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>வணக்கம் வந்தனம் | தமிழ் பாரம்பரிய நிகழ்வு அலங்காரம்</title>
+    <meta name="description"
+        content="Traditional Tamil wedding mandaps, auspicious ceremony decorations, and cultural event artistry rooted in heritage.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Tiro+Tamil:ital@0;1&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script> 
+</head>
+
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Premium Loader -->
+    <div class="loader">
+        <img src="assets/image.png" alt="வணக்கம் வந்தனம் Logo"
+            style="height: 100px; width: auto; margin-bottom: 1.5rem; filter: drop-shadow(0 4px 15px rgba(255,179,0,0.4));">
+        <div class="loader-text font-tamil">
+            <span>வணக்கம்</span> <span class="text-gold">வந்தனம்</span>
+            <div class="loader-subtitle">பாரம்பரிய அலங்காரம்</div>
+        </div>
+        <div class="loader-progress"></div>
+    </div>
+
+    <!-- Canvas for Particle Animation -->
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="cursor"></div>
+    <div class="cursor-follower">
+        <svg class="cursor-progress" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--accent-gold)" stroke-width="2"
+                stroke-dasharray="283" stroke-dashoffset="283"></circle>
+        </svg>
+    </div>
+
+    <!-- Background Animated Blobs -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Advanced Cursor Hover Reveal Image -->
+    <img src="" alt="" class="hover-preview-img" id="hoverPreviewImg">
+
+    <nav class="navbar">
+        <div class="logo" style="display: flex; align-items: center; gap: 10px;">
+            <img src="assets/image.png" alt="Logo">
+            <span class="logo-text font-tamil magnetic" data-strength="30">வணக்கம் <span
+                    class="accent">வந்தனம்</span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about" class="magnetic" data-strength="20">About</a></li>
+            <li><a href="#gallery" class="magnetic" data-strength="20">Gallery</a></li>
+            <li><a href="#services" class="magnetic" data-strength="20">Expertise</a></li>
+            <li><a href="#why-us" class="magnetic" data-strength="20">Why Us</a></li>
+        </ul>
+        <a href="https://wa.me/919788742627" target="_blank" class="btn-primary magnetic" data-strength="40">Consult
+            Expert</a>
+
+        <div class="hamburger" id="hamburgerBtn">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-inner">
+            <div class="mobile-menu-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="assets/image.png" alt="Logo" style="height: 50px; width: auto;">
+                    <span class="logo-text font-serif">வணக்கம் <span class="accent">வந்தனம்</span></span>
+                </div>
+                <button class="mobile-close" id="mobileClose">&times;</button>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#services">Expertise</a></li>
+                <li><a href="#why-us">Why Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="https://wa.me/919788742627" target="_blank" class="btn-primary"
+                style="width:100%;text-align:center;margin-top:2rem;">Consult Expert</a>
+        </div>
+    </div>
+
+    <header class="hero">
+        <!-- Thoranam Animation -->
+        <div class="thoranam-wrapper" id="thoranamWrapper"></div>
+
+        <div class="hero-bg-wrapper">
+            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80" alt="Royal Wedding Mandap" class="bg-img" />
+            <div class="hero-overlay"></div>
+            <div class="lens-flare"></div>
+            <div class="hero-noise"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="badge reveal-text">பாரம்பரிய அலங்காரம் • PREMIUM DECOR</div>
+            <h1 class="hero-title">
+                <div class="line-mask">
+                    <div class="line-content">CELEBRATION</div>
+                </div>
+                <div class="line-mask">
+                    <div class="line-content"><span class="italic-serif text-gold">SUPPLIES</span></div>
+                </div>
+            </h1>
+            <p class="hero-subtitle reveal-text delay-1">பாரம்பரிய குத்துவிளக்கு முதல் பலூன்கள் வரை. Buy premium
+                decoration supplies including balloons, traditional diyas, thoranams, and artificial marigolds online.
+            </p>
+            <div class="brand-signature reveal-text delay-1-5">
+                Party-na 🙏 <span class="text-gold">வணக்கம் வந்தனம்</span> dhaan !
+            </div>
+            <div class="hero-actions reveal-text delay-2">
+                <a href="#packages" class="btn-primary glow-effect magnetic" data-strength="40">Shop Items</a>
+                <button class="btn-secondary play-btn magnetic" data-strength="30" id="openStylist">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+                    </svg>
+                    AI Stylist
+                </button>
+            </div>
+        </div>
+
+
+    </header>
+
+    <div class="hero-curtain"></div>
+
+    <div class="marquee-section relative-z">
+        <div class="marquee-content font-tamil">
+            <span>Party-na 🙏 வணக்கம் வந்தனம் dhaan !</span>
+            <span>✨</span>
+            <span>Party-na 🙏 வணக்கம் வந்தனம் dhaan !</span>
+            <span>✨</span>
+            <span>Party-na 🙏 வணக்கம் வந்தனம் dhaan !</span>
+            <span>✨</span>
+        </div>
+    </div>
+
+    <section id="categories" class="category-row-section relative-z">
+        <div class="category-container">
+            <div class="category-item magnetic" data-strength="10">
+                <div class="category-circle">
+                    <img src="assets/balloons.png" alt="Balloons" loading="lazy">
+                </div>
+                <span class="font-tamil">பலூன்கள்<br><small>Balloons</small></span>
+            </div>
+            <div class="category-item magnetic" data-strength="10">
+                <div class="category-circle">
+                    <img src="assets/thoranam.png" alt="Thoranam" loading="lazy">
+                </div>
+                <span class="font-tamil">தோரணம்<br><small>Thoranams</small></span>
+            </div>
+            <div class="category-item magnetic" data-strength="10">
+                <div class="category-circle">
+                    <img src="assets/lamps.png" alt="Lamps" loading="lazy">
+                </div>
+                <span class="font-tamil">குத்துவிளக்கு<br><small>Brass Lamps</small></span>
+            </div>
+            <div class="category-item magnetic" data-strength="10">
+                <div class="category-circle">
+                    <img src="assets/garlands.png" alt="Garlands" loading="lazy">
+                </div>
+                <span class="font-tamil">மாலைகள்<br><small>Garlands</small></span>
+            </div>
+            <div class="category-item magnetic" data-strength="10">
+                <div class="category-circle">
+                    <img src="assets/backdrops.png" alt="Backdrops" loading="lazy">
+                </div>
+                <span class="font-tamil">பின்னணி<br><small>Backdrops</small></span>
+            </div>
+            <div class="category-item magnetic" data-strength="10">
+                <div class="category-circle">
+                    <img src="https://images.unsplash.com/photo-1604928014526-0e1bd76dbcc4?auto=format&fit=crop&q=60"
+                        alt="Rangoli" loading="lazy">
+                </div>
+                <span class="font-tamil">கோலம்<br><small>Rangoli</small></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wave Divider: Hero to About -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+            <path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,15 1440,30 L1440,60 L0,60Z" fill="#FFFFFF" />
+        </svg>
+    </div>
+
+    <section id="about" class="about-section relative-z">
+        <!-- Floating Ornaments -->
+        <div class="floating-ornament" style="top:10%;left:5%;">🪷</div>
+        <div class="floating-ornament" style="top:30%;right:8%;">🪔</div>
+        <div class="floating-ornament" style="bottom:15%;left:15%;">🪷</div>
+        <div class="floating-ornament" style="bottom:25%;right:12%;">🪔</div>
+
+        <div class="about-container reveal-on-scroll">
+            <div class="about-image tilt-card">
+                <div class="card-inner">
+                    <img src="https://images.unsplash.com/photo-1606216492023-e51c8b939c36?auto=format&fit=crop&q=60"
+                        alt="About Us Decor" class="parallax-img" loading="lazy">
+                </div>
+            </div>
+            <div class="about-content">
+                <h2 class="section-title reveal-on-scroll">
+                    <span class="split-parent"><span class="split-child">பாரம்பரிய</span></span>
+                    <span class="split-parent"><span
+                            class="split-child italic-serif gradient-text">பொருட்கள்</span></span>
+                </h2>
+                <div class="section-divider reveal-on-scroll" style="justify-content: flex-start; margin: 0 0 2.5rem;">
+                    <div class="divider-line" style="max-width: 100px;"></div>
+                    <div class="divider-ornament">🪔</div>
+                </div>
+                <p class="section-subtitle">வணக்கம் வந்தனத்தில், தரமான அலங்கார பொருட்களை வழங்குகிறோம். We provide
+                    high-quality, authentic celebration supplies delivered straight to your door.</p>
+                <p class="section-subtitle">உங்களுக்கு தேவையான அனைத்தும் ஒரே இடத்தில். Whether you need majestic brass
+                    kuthuvilakkus, vibrant artificial garlands, or complete DIY balloon kits, we have everything to make
+                    your event perfect.</p>
+                <a href="#packages" class="btn-primary magnetic glow-effect mt-4" data-strength="30">Shop Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wave Divider: About to Stats -->
+    <div class="wave-divider flip">
+        <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+            <path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,15 1440,30 L1440,60 L0,60Z" fill="#FFFFFF" />
+        </svg>
+    </div>
+
+    <section id="why-us" class="stats-section parallax-section relative-z">
+        <div class="stats-container stagger-reveal reveal-on-scroll">
+            <div class="stat-item magnetic" data-strength="15">
+                <h3 class="counter" data-target="5000">0</h3><span>+</span>
+                <p>Orders Delivered</p>
+            </div>
+            <div class="stat-item magnetic" data-strength="15">
+                <h3 class="counter" data-target="500">0</h3><span>+</span>
+                <p>Premium Items</p>
+            </div>
+            <div class="stat-item magnetic" data-strength="15">
+                <h3 class="counter" data-target="100">0</h3><span>%</span>
+                <p>Happy Customers</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-cards-section relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <h2 class="section-title">
+                <span class="split-parent"><span class="split-child">முழுமையான</span></span>
+                <span class="split-parent"><span class="split-child italic-serif gradient-text">அலங்கார
+                        தொகுப்புகள்</span></span>
+            </h2>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🪔</div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">DIY Combo Kits • Everything you need in one box for a perfect celebration.</p>
+        </div>
+        <div class="service-cards-grid">
+            <div class="service-category-card reveal-on-scroll magnetic" data-strength="5">
+                <div class="scc-image"><img
+                        src="assets/hero.png"
+                        alt="Wedding Kit" loading="lazy"></div>
+                <div class="scc-body">
+                    <h3>திருமண அலங்கார பெட்டி</h3>
+                    <p>முழுமையான பாரம்பரிய திருமண பொருட்கள் • Complete traditional wedding decor supply kit.</p>
+                    <div class="scc-tags"><span class="tag-grand">Bestseller</span><span class="tag-premium">Combo
+                            Box</span></div>
+                    <div class="scc-sub-list">
+                        <div class="scc-sub"><img
+                                src="assets/lamps.png"
+                                alt="Lamps">
+                            <div><strong>Brass Kuthuvilakku Pair</strong><small>Included in the box.</small></div>
+                        </div>
+                        <div class="scc-sub"><img
+                                src="assets/thoranam.png"
+                                alt="Thoranam">
+                            <div><strong>Mango Leaf Thoranam (5m)</strong><small>Included in the box.</small></div>
+                        </div>
+                    </div>
+                    <button class="btn-primary w-full mt-4 magnetic" data-strength="20">Buy Combo - ₹8,999</button>
+                </div>
+            </div>
+
+            <div class="service-category-card reveal-on-scroll magnetic" data-strength="5">
+                <div class="scc-image"><img
+                        src="assets/balloons.png"
+                        alt="Birthday Kit" loading="lazy"></div>
+                <div class="scc-body">
+                    <h3>பிறந்தநாள் பலூன் பெட்டி</h3>
+                    <p>மந்திர உலகம் போன்ற பலூன் அலங்காரம் • Magical themes and balloon kits for DIY setups.</p>
+                    <div class="scc-tags"><span class="tag-elite">Premium</span><span class="tag-premium">Combo
+                            Box</span></div>
+                    <div class="scc-sub-list">
+                        <div class="scc-sub"><img
+                                src="assets/balloons.png"
+                                alt="Balloons">
+                            <div><strong>200x Pastel Balloons</strong><small>Included in the box with pump.</small>
+                            </div>
+                        </div>
+                        <div class="scc-sub"><img
+                                src="https://images.unsplash.com/photo-1561571994-3c61c554181a?auto=format&fit=crop&q=60"
+                                alt="Neon">
+                            <div><strong>Happy Birthday Neon Sign</strong><small>Included in the box.</small></div>
+                        </div>
+                    </div>
+                    <button class="btn-primary w-full mt-4 magnetic" data-strength="20">Buy Combo - ₹2,499</button>
+                </div>
+            </div>
+
+            <div class="service-category-card reveal-on-scroll magnetic" data-strength="5">
+                <div class="scc-image"><img
+                        src="assets/thoranam.png"
+                        alt="Festival Kit" loading="lazy"></div>
+                <div class="scc-body">
+                    <h3>திருவிழா & பூஜை பெட்டி</h3>
+                    <p>தீபாவளி, பொங்கல், பூஜை அலங்காரம் • Vibrant Diwali and home transformation supplies.</p>
+                    <div class="scc-tags"><span class="tag-premium">Combo Box</span></div>
+                    <div class="scc-sub-list">
+                        <div class="scc-sub"><img
+                                src="assets/garlands.png"
+                                alt="Marigold">
+                            <div><strong>10x Fluffy Marigolds</strong><small>Included in the box.</small></div>
+                        </div>
+                        <div class="scc-sub"><img
+                                src="https://images.unsplash.com/photo-1604928014526-0e1bd76dbcc4?auto=format&fit=crop&q=60"
+                                alt="Rangoli">
+                            <div><strong>Rangoli Stencil Kit</strong><small>Included with 5 colors.</small></div>
+                        </div>
+                    </div>
+                    <button class="btn-primary w-full mt-4 magnetic" data-strength="20">Buy Combo - ₹1,499</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery-section relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <h2 class="section-title" id="packages">பிரபலமான <span class="italic-serif gradient-text">பொருட்கள்</span>
+            </h2>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🪔</div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">Trending Items • Shop premium decoration supplies.</p>
+
+            <div class="filter-btns">
+                <button class="filter-btn active magnetic" data-filter="all" data-strength="10">All Items</button>
+                <button class="filter-btn magnetic" data-filter="balloons" data-strength="10">Balloons</button>
+                <button class="filter-btn magnetic" data-filter="traditional" data-strength="10">Traditional</button>
+                <button class="filter-btn magnetic" data-filter="props" data-strength="10">Props</button>
+            </div>
+        </div>
+
+        <div class="product-grid">
+            <div class="product-card reveal-on-scroll" data-category="traditional">
+                <div class="product-img">
+                    <img src="assets/lamps.png"
+                        alt="Kuthuvilakku" loading="lazy">
+                    <span class="product-badge">Bestseller</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">⭐ 4.9 (120 Reviews)</div>
+                    <h3 class="font-tamil">Premium Brass Kuthuvilakku (Pair)</h3>
+                    <p>Authentic 3ft tall traditional brass lamps for auspicious beginnings.</p>
+                    <div class="product-price">₹4,999 <span class="old-price">₹5,500</span></div>
+                    <button class="btn-primary w-full magnetic" data-strength="20">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card reveal-on-scroll" data-category="balloons">
+                <div class="product-img">
+                    <img src="assets/balloons.png"
+                        alt="Balloons" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">⭐ 4.8 (85 Reviews)</div>
+                    <h3 class="font-tamil">Pastel Balloon Arch Kit (100pcs)</h3>
+                    <p>DIY premium latex balloons in mint, peach, and gold with arch strip.</p>
+                    <div class="product-price">₹499</div>
+                    <button class="btn-primary w-full magnetic" data-strength="20">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card reveal-on-scroll" data-category="traditional">
+                <div class="product-img">
+                    <img src="assets/thoranam.png"
+                        alt="Thoranam" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">⭐ 4.9 (200 Reviews)</div>
+                    <h3 class="font-tamil">Artificial Mango Leaf Thoranam</h3>
+                    <p>Washable, highly realistic 3-meter traditional door hanging.</p>
+                    <div class="product-price">₹299 <span class="old-price">₹450</span></div>
+                    <button class="btn-primary w-full magnetic" data-strength="20">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card reveal-on-scroll" data-category="props">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1561571994-3c61c554181a?auto=format&fit=crop&q=60"
+                        alt="Neon Sign" loading="lazy">
+                    <span class="product-badge">New</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">⭐ 4.7 (45 Reviews)</div>
+                    <h3 class="font-tamil">'Happy Birthday' Warm Neon Sign</h3>
+                    <p>High-quality acrylic LED sign perfect for photo backdrops.</p>
+                    <div class="product-price">₹1,499</div>
+                    <button class="btn-primary w-full magnetic" data-strength="20">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card reveal-on-scroll" data-category="traditional">
+                <div class="product-img">
+                    <img src="assets/garlands.png"
+                        alt="Marigold" loading="lazy">
+                    <span class="product-badge">Trending</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">⭐ 5.0 (310 Reviews)</div>
+                    <h3 class="font-tamil">Fluffy Artificial Marigold (Set of 5)</h3>
+                    <p>Vibrant 5ft long yellow and orange garlands for festive draping.</p>
+                    <div class="product-price">₹349</div>
+                    <button class="btn-primary w-full magnetic" data-strength="20">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card reveal-on-scroll" data-category="props">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=60"
+                        alt="Backdrop Stand" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">⭐ 4.8 (95 Reviews)</div>
+                    <h3 class="font-tamil">Gold Metal Ring Backdrop Stand</h3>
+                    <p>Adjustable 6ft circular arch stand, perfect for floral and balloon setups.</p>
+                    <div class="product-price">₹2,499 <span class="old-price">₹3,200</span></div>
+                    <button class="btn-primary w-full magnetic" data-strength="20">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="custom-vision-box reveal-on-scroll">
+            <h3 class="font-serif">Have a Custom Vision?</h3>
+            <p>Our design gallery is just the beginning. We specialize in bringing unique, never-seen-before concepts to
+                life. Let's sketch your dream together.</p>
+            <a href="https://wa.me/919788742627" target="_blank" class="btn-primary magnetic"
+                data-strength="20">Collaborate with Stylist</a>
+        </div>
+    </section>
+
+    <section class="video-showcase relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <h2 class="section-title">காணொளி <span class="italic-serif gradient-text">காட்சிகள்</span></h2>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🪔</div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">எங்கள் சமீபத்திய நிகழ்வுகளின் அழகிய மாற்றங்களை காணுங்கள் • Watch our
+                transformations come alive.</p>
+        </div>
+        <div class="video-grid">
+            <div class="video-card reveal-on-scroll magnetic" data-strength="5">
+                <div class="video-thumb">
+                    <img src="https://images.unsplash.com/photo-1583939000240-690e17815336?auto=format&fit=crop&q=60"
+                        alt="Wedding Reel" loading="lazy">
+                    <div class="play-overlay">
+                        <div class="play-circle">▶</div>
+                    </div>
+                    <span class="video-badge">Wedding</span>
+                </div>
+                <h4>Cinematic Entrance Highlights</h4>
+            </div>
+            <div class="video-card reveal-on-scroll magnetic" data-strength="5">
+                <div class="video-thumb">
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8892bc952f?auto=format&fit=crop&q=60"
+                        alt="Birthday Reel" loading="lazy">
+                    <div class="play-overlay">
+                        <div class="play-circle">▶</div>
+                    </div>
+                    <span class="video-badge">Birthday</span>
+                </div>
+                <h4>Neon Balloon Party Tour</h4>
+            </div>
+            <div class="video-card reveal-on-scroll magnetic" data-strength="5">
+                <div class="video-thumb">
+                    <img src="https://images.unsplash.com/photo-1605808361706-a41eb6064121?auto=format&fit=crop&q=80"
+                        alt="Traditional" loading="lazy">
+                    <div class="play-overlay">
+                        <div class="play-circle">▶</div>
+                    </div>
+                    <span class="video-badge">Traditional</span>
+                </div>
+                <h4>Traditional Petal Ceremony</h4>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services-section relative-z">
+        <div class="services-container">
+            <div class="services-text reveal-on-scroll">
+                <h2 class="section-title">எங்கள் <span class="italic-serif text-maroon">திறன்கள்</span></h2>
+                <div class="section-divider" style="justify-content: flex-start; margin: 0 0 2rem;">
+                    <div class="divider-line" style="max-width: 100px;"></div>
+                    <div class="divider-ornament">🪔</div>
+                </div>
+                <p class="section-subtitle" style="margin: 0;">நுணுக்கமான திட்டமிடல், குறைபாடற்ற செயல்பாடு. ஒவ்வொரு
+                    மலரும், ஒவ்வொரு விளக்கும், ஒவ்வொரு விவரமும் எங்கள் கவனிப்பில் • Meticulous planning with flawless
+                    execution.</p>
+            </div>
+            <div class="services-accordion reveal-on-scroll">
+                <div class="accordion-item active magnetic" data-strength="5">
+                    <div class="accordion-header">
+                        <h3>01. நிகழ்வு வடிவமைப்பு • Event Design</h3>
+                        <div class="icon-wrapper"><span class="icon">+</span></div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>நாங்கள் தனித்துவமான கருப்பொருளை உருவாக்குகிறோம். கையால் தேர்ந்தெடுக்கப்பட்ட மலர்கள் முதல்
+                            தனிப்பயன் மேடை கட்டமைப்புகள் வரை • We craft bespoke themes with hand-picked florals and
+                            custom-built stage architectures.</p>
+                    </div>
+                </div>
+                <div class="accordion-item magnetic" data-strength="5">
+                    <div class="accordion-header">
+                        <h3>02. அரங்க மாற்றம் • Venue Transformation</h3>
+                        <div class="icon-wrapper"><span class="icon">+</span></div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>வெறும் அரங்குகளை மாளிகைகளாக மாற்றுகிறோம். தோரணம், கோலம், குத்துவிளக்கு, மற்றும் மலர்
+                            அலங்காரம் • We turn empty halls into majestic palaces with draping, lighting, and structural
+                            artistry.</p>
+                    </div>
+                </div>
+                <div class="accordion-item magnetic" data-strength="5">
+                    <div class="accordion-header">
+                        <h3>03. பலூன் கலை • Balloon Artistry</h3>
+                        <div class="icon-wrapper"><span class="icon">+</span></div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>இயற்கையான பலூன் மாலைகள், பிரமாண்ட நுழைவு சுரங்கங்கள், மற்றும் அழகிய அமைப்புகள் • Organic
+                            balloon garlands, entrance tunnels, and whimsical setups for celebrations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process-section relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <h2 class="section-title">
+                <span class="split-parent"><span class="split-child">மந்திரம்</span></span>
+                <span class="split-parent"><span class="split-child italic-serif gradient-text">எப்படி</span></span>
+                <span class="split-parent"><span class="split-child">நடக்கிறது</span></span>
+            </h2>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🪔</div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">எங்கள் 4 படி செயல்முறை உங்கள் நிகழ்வை குறைபாடற்றதாக உறுதிசெய்கிறது • Our
+                seamless 4-step process ensures flawless execution.</p>
+        </div>
+        <div class="process-grid stagger-reveal reveal-on-scroll">
+            <div class="process-step reveal-on-scroll magnetic" data-strength="8">
+                <div class="step-number">01</div>
+                <h3>ஆலோசனை</h3>
+                <p>உங்கள் கனவை கேட்டு, பண்பாட்டு விருப்பங்கள், பட்ஜெட் புரிந்துகொள்கிறோம் • We listen to your vision and
+                    preferences.</p>
+            </div>
+            <div class="process-step reveal-on-scroll magnetic" data-strength="8">
+                <div class="step-number">02</div>
+                <h3>வடிவமைப்பு</h3>
+                <p>எங்கள் கலைஞர்கள் மூட் போர்டுகள் மற்றும் 3D வடிவமைப்புகளை உருவாக்குவர் • Mood boards and 3D renders of
+                    your plan.</p>
+            </div>
+            <div class="process-step reveal-on-scroll magnetic" data-strength="8">
+                <div class="step-number">03</div>
+                <h3>அமைப்பு</h3>
+                <p>எங்கள் குழு முன்கூட்டியே வந்து அரங்கை அழகிய படைப்பாக மாற்றுகிறது • We transform your venue into a
+                    masterpiece.</p>
+            </div>
+            <div class="process-step reveal-on-scroll magnetic" data-strength="8">
+                <div class="step-number">04</div>
+                <h3>பிரமாண்ட வெளிப்பாடு</h3>
+                <p>நீங்கள் நுழையும்போது மகிழ்ச்சி. கொண்டாட்டத்தில் கவனம் செலுத்துங்கள் • Walk in to perfection and
+                    celebrate.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="vision-parallax relative-z">
+        <div class="vision-content reveal-on-scroll">
+            <h2 class="font-serif">"நாங்கள் இடங்களை அலங்கரிப்பதில்லை; உங்கள் <span
+                    class="italic-serif text-gold">விலைமதிப்பற்ற தருணங்களுக்கு</span> கவிதை படைக்கிறோம்."</h2>
+        </div>
+    </section>
+
+    <section class="journal-section relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <h2 class="section-title">
+                <span class="split-parent"><span class="split-child">எங்கள்</span></span>
+                <span class="split-parent"><span class="split-child italic-serif gradient-text">பதிவுகள்</span></span>
+            </h2>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🪔</div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">ஆடம்பர நிகழ்வு போக்குகள், வண்ண தட்டுகள், மற்றும் பண்பாட்டு கலை பற்றிய
+                நுண்ணறிவுகள் • Insights into trends and cultural artistry.</p>
+        </div>
+        <div class="journal-grid">
+            <article class="journal-card reveal-on-scroll">
+                <div class="journal-img-box">
+                    <img src="assets/backdrops.png"
+                        alt="Trends">
+                    <span class="journal-date">ஏப்ரல் 2024</span>
+                </div>
+                <div class="journal-info">
+                    <h3>2024 திருமண வண்ண தட்டுகள்: பாரம்பரிய மெரூனுக்கு அப்பால்</h3>
+                    <p>தென்னிந்திய விழாக்களில் சேஜ் பச்சை, எரி ஆரஞ்சு, மற்றும் தந்தவெண்மை நிறங்களின் எழுச்சி...</p>
+                    <a href="#" class="read-more">மேலும் படிக்க <span>→</span></a>
+                </div>
+            </article>
+            <article class="journal-card reveal-on-scroll">
+                <div class="journal-img-box">
+                    <img src="assets/hero.png"
+                        alt="Craft">
+                    <span class="journal-date">மார்ச் 2024</span>
+                </div>
+                <div class="journal-info">
+                    <h3>கோவில் கருப்பொருள் மேடைகள்: கலை மறுமலர்ச்சி</h3>
+                    <p>நவீன கலைஞர்கள் பண்டைய கட்டிடக்கலை அதிசயங்களை எவ்வாறு மீண்டும் உருவாக்குகின்றனர்...</p>
+                    <a href="#" class="read-more">மேலும் படிக்க <span>→</span></a>
+                </div>
+            </article>
+            <article class="journal-card reveal-on-scroll">
+                <div class="journal-img-box">
+                    <img src="assets/balloons.png"
+                        alt="Modern">
+                    <span class="journal-date">பிப்ரவரி 2024</span>
+                </div>
+                <div class="journal-info">
+                    <h3>எளிமையான பிறந்தநாள்கள்: குறைவே அதிக மந்திரம்</h3>
+                    <p>போஹோ-சிக், பாம்பாஸ் புல், மற்றும் நுட்பமான இயற்கை பலூன் கலையை நோக்கிய மாற்றம்...</p>
+                    <a href="#" class="read-more">மேலும் படிக்க <span>→</span></a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="testimonials-section relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <h2 class="section-title">
+                <span class="split-parent"><span class="split-child">மகிழ்ச்சியான</span></span>
+                <span class="split-parent"><span class="split-child italic-serif">இதயங்கள்</span></span>
+            </h2>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🪔</div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">எங்களிடம் நம்பிக்கை வைத்த குடும்பங்களின் உண்மையான கதைகள் • Real stories from
+                happy families.</p>
+        </div>
+        <div class="testimonials-track" id="testimonialTrack">
+            <div class="testimonial-card reveal-on-scroll">
+                <div class="stars">★★★★★</div>
+                <p>"The mandap was beyond our dreams. Every guest was in awe. Vanakam Vandhanam turned our wedding into
+                    a fairy tale."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">P</div>
+                    <div><strong>Priya & Karthik</strong><span>Wedding — Chennai</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal-on-scroll">
+                <div class="stars">★★★★★</div>
+                <p>"My daughter's Jungle Safari birthday was magical! The life-size cutouts and balloon tunnel left the
+                    kids speechless."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">S</div>
+                    <div><strong>Sanjay Ramanathan</strong><span>Birthday — Coimbatore</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal-on-scroll">
+                <div class="stars">★★★★★</div>
+                <p>"They transformed our home for Diwali like never before. The marigold draping and brass diyas were
+                    absolutely stunning."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">M</div>
+                    <div><strong>Meena Sundaram</strong><span>Festival — Madurai</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section relative-z">
+        <div class="faq-container">
+            <div class="faq-left reveal-on-scroll">
+                <h2 class="section-title">
+                    <span class="split-parent"><span class="split-child">அடிக்கடி</span></span>
+                    <span class="split-parent"><span
+                            class="split-child italic-serif text-maroon">கேள்விகள்</span></span>
+                </h2>
+                <div class="section-divider" style="justify-content: flex-start; margin: 0 0 2rem;">
+                    <div class="divider-line" style="max-width: 100px;"></div>
+                    <div class="divider-ornament">🪔</div>
+                </div>
+                <p class="section-subtitle" style="margin: 0 0 2rem;">உங்கள் கனவு நிகழ்வு அலங்காரத்தை பதிவு செய்ய
+                    தேவையான அனைத்தும் • Everything you need to know.</p>
+                <a href="https://wa.me/919788742627" target="_blank" class="btn-primary magnetic"
+                    data-strength="20">இன்னும் கேள்விகளா?</a>
+            </div>
+            <div class="faq-right reveal-on-scroll">
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h3>How far in advance should I book?</h3><span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We recommend booking at least 2–4 weeks in advance for birthdays and 1–3 months for weddings
+                            to ensure availability and allow time for custom design work.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h3>Do you provide floral and balloon services?</h3><span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We offer fresh floral arrangements, artificial flower setups, organic balloon garlands,
+                            entrance arches, and full venue transformation packages.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h3>What areas do you serve?</h3><span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We primarily serve Tamil Nadu — Chennai, Coimbatore, Madurai, Trichy, and surrounding areas.
+                            We also take destination event bookings across South India.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h3>Can I customize the decoration theme?</h3><span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Every event is fully bespoke. Share your Pinterest boards, color palettes, or
+                            just describe your dream — we'll bring it to life.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners-section relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <p class="badge magnetic text-maroon" data-strength="15"
+                style="background: rgba(128,0,0,0.05); border-color: rgba(128,0,0,0.1); font-weight: 700;">Elite Venue
+                Partners</p>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🪔</div>
+                <div class="divider-line"></div>
+            </div>
+        </div>
+        <div class="marquee partners-marquee">
+            <div class="marquee-content partners-track">
+                <span>RITZ CARLTON</span><span>•</span><span>THE LEELA PALACE</span><span>•</span><span>TAJ
+                    HOTELS</span><span>•</span><span>FOUR SEASONS</span><span>•</span><span>LE
+                    MERIDIEN</span><span>•</span><span>OBEROI HOTELS</span><span>•</span><span>ITC GRAND
+                    CHOLA</span><span>•</span><span>JW MARRIOTT</span><span>•</span><span>HYATT
+                    REGENCY</span><span>•</span><span>SHERATON</span><span>•</span>
+                <span>RITZ CARLTON</span><span>•</span><span>THE LEELA PALACE</span><span>•</span><span>TAJ
+                    HOTELS</span><span>•</span><span>FOUR SEASONS</span><span>•</span><span>LE
+                    MERIDIEN</span><span>•</span><span>OBEROI HOTELS</span><span>•</span><span>ITC GRAND
+                    CHOLA</span><span>•</span><span>JW MARRIOTT</span><span>•</span><span>HYATT
+                    REGENCY</span><span>•</span><span>SHERATON</span><span>•</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section relative-z">
+        <div class="section-header text-center reveal-on-scroll">
+            <h2 class="section-title">
+                <span class="split-parent"><span class="split-child">முதலீட்டு</span></span>
+                <span class="split-parent"><span class="split-child italic-serif">தொகுப்புகள்</span></span>
+            </h2>
+            <div class="section-divider">
+                <div class="divider-line"></div>
+                <div class="divider-ornament">🪔</div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle">வெளிப்படையான விலை நிர்ணயம். உங்கள் தேவைக்கு ஏற்ப தனிப்பயனாக்கப்படும் •
+                Transparent pricing, fully customizable.</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card reveal-on-scroll">
+                <div class="pricing-badge">Essential</div>
+                <h3>Intimate Bliss</h3>
+                <div class="price">₹25,000<span>+</span></div>
+                <ul>
+                    <li>Standard Backdrop Design</li>
+                    <li>Premium Artificial Florals</li>
+                    <li>LED Spot Lighting</li>
+                    <li>Cake Table Styling</li>
+                    <li>2-Person Setup Team</li>
+                </ul>
+                <a href="https://wa.me/919788742627" target="_blank" class="btn-primary w-full magnetic"
+                    data-strength="15">Select Package</a>
+            </div>
+            <div class="pricing-card reveal-on-scroll popular">
+                <div class="pricing-tag">Most Popular</div>
+                <div class="pricing-badge">Grand</div>
+                <h3>Cultural Heritage</h3>
+                <div class="price">₹75,000<span>+</span></div>
+                <ul>
+                    <li>Full Mandap / Stage Decor</li>
+                    <li>Mix of Fresh & Silk Flowers</li>
+                    <li>Custom Entrance Arch</li>
+                    <li>Venue Mood Lighting</li>
+                    <li>Full Setup & Teardown</li>
+                    <li>Dedicated Project Lead</li>
+                </ul>
+                <a href="https://wa.me/919788742627" target="_blank" class="btn-primary w-full magnetic"
+                    data-strength="15">Select Package</a>
+            </div>
+            <div class="pricing-card reveal-on-scroll">
+                <div class="pricing-badge">Elite</div>
+                <h3>Royal Signature</h3>
+                <div class="price">₹1,50,000<span>+</span></div>
+                <ul>
+                    <li>Ultra-Premium Theme Design</li>
+                    <li>100% Exotic Fresh Florals</li>
+                    <li>3D Projection Mapping</li>
+                    <li>Bespoke Furniture Rental</li>
+                    <li>VIP Guest Lounge Styling</li>
+                    <li>On-site Event Coordinator</li>
+                </ul>
+                <a href="https://wa.me/919788742627" target="_blank" class="btn-primary w-full magnetic"
+                    data-strength="15">Select Package</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-us" class="contact-section-v4 relative-z">
+        <div class="container">
+            <div class="section-header text-center reveal-on-scroll">
+                <h2 class="section-title">தொடர்பு <span class="italic-serif text-maroon">கொள்ளுங்கள்</span></h2>
+                <div class="section-divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-ornament">🪔</div>
+                    <div class="divider-line"></div>
+                </div>
+                <p class="section-subtitle">Have a question or ready to book? We'd love to hear from you.</p>
+            </div>
+
+            <div class="contact-v4-grid">
+                <div class="contact-v4-info reveal-on-scroll">
+                    <div class="info-card">
+                        <div class="info-item">
+                            <div class="info-icon">📍</div>
+                            <div class="info-text">
+                                <h4>Our Studio</h4>
+                                <p>No. 12, Temple Street, Mylapore, Chennai - 600004</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">📞</div>
+                            <div class="info-text">
+                                <h4>Call Us</h4>
+                                <p>+91 97887 42627</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">✉️</div>
+                            <div class="info-text">
+                                <h4>Email Us</h4>
+                                <p>hello@vanakamvandhanam.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-v4-form-box reveal-on-scroll">
+                    <form class="v4-form contact-form-premium">
+                        <div class="form-row">
+                            <input type="text" placeholder="Name" required>
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <input type="text" placeholder="Subject" required>
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                        <button type="submit" class="btn-primary w-full magnetic glow-effect">Send Message / செய்தியை அனுப்பு</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer relative-z">
+        <div class="footer-bg-animation"></div>
+        <div class="footer-top">
+            <div class="footer-brand reveal-on-scroll">
+                <img src="assets/image.png" alt="வணக்கம் வந்தனம் Logo"
+                    style="height: 80px; width: auto; margin-bottom: 1rem; filter: drop-shadow(0 2px 10px rgba(255,179,0,0.3));">
+                <h2 class="font-serif">வணக்கம் <span class="text-gold">வந்தனம்</span></h2>
+                <p>பாரம்பரிய பண்பாட்டு மரபுடன் நினைவுகளை படைக்கிறோம் • Crafting memories with rich heritage and modern
+                    luxury.</p>
+            </div>
+            <div class="footer-links reveal-on-scroll">
+                <h3>Quick Links</h3>
+                <a href="#gallery" class="magnetic" data-strength="10">Gallery</a>
+                <a href="#services" class="magnetic" data-strength="10">Services</a>
+                <a href="#contact-us" class="magnetic" data-strength="10">Contact Us</a>
+            </div>
+            <div class="footer-contact reveal-on-scroll">
+                <h3>Connect</h3>
+                <p>Email: hello@vanakamvandhanam.com</p>
+                <p>Phone: +91 97887 42627</p>
+                <div class="social-icons">
+                    <a href="#" class="magnetic" data-strength="20">IG</a>
+                    <a href="#" class="magnetic" data-strength="20">FB</a>
+                    <a href="#" class="magnetic" data-strength="20">WA</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 வணக்கம் வந்தனம் நிகழ்வுகள். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை • All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" title="Back to Top">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+        </svg>
+    </button>
+
+    <!-- AI Stylist Modal -->
+    <div class="modal-overlay" id="stylistModal">
+        <div class="modal-content">
+            <button class="close-modal magnetic" data-strength="15">&times;</button>
+            <div class="modal-header">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="var(--accent-gold)">
+                    <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+                </svg>
+                <h3>Smart AI Stylist</h3>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <p class="italic">Describe your dream event, and let our AI suggest concepts.</p>
+                <div class="input-group">
+                    <label>Event Type</label>
+                    <input type="text" id="aiEvent" placeholder="e.g. Traditional Outdoor Wedding">
+                </div>
+                <div class="input-group">
+                    <label>Palette & Vibe</label>
+                    <input type="text" id="aiPalette" placeholder="e.g. Royal Maroon & Gold">
+                </div>
+                <button class="btn-primary w-full magnetic" data-strength="20" id="generateBtn">Generate Magic</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919788742627" target="_blank" class="floating-wa magnetic" data-strength="30">
+        <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+        </svg>
+    </a>
+
+    <!-- Image Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <img src="" alt="Lightbox" id="lightboxImg">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15" />
+        </svg>
+    </button>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>
